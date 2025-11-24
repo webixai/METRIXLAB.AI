@@ -1,0 +1,28 @@
+{
+  "name": "ai-website-builder",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 5000",
+    "build": "next build",
+    "start": "next start -p 5000",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "next": "^15.0.3",
+    "openai": "^4.72.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "typescript": "^5",
+    "eslint": "^8",
+    "eslint-config-next": "^15.0.3",
+    "tailwindcss": "^3.4.1",
+    "postcss": "^8.4.47",
+    "autoprefixer": "^10.4.20"
+  }
+}
