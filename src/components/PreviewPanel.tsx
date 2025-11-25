@@ -33,8 +33,8 @@ export default function PreviewPanel({ code }: PreviewPanelProps) {
   };
 
   return (
-    <div className="w-full lg:w-2/3 bg-gray-50 dark:bg-gray-800 flex flex-col">
-      <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 px-6 py-4 flex items-center justify-between">
+    <div className="w-full lg:w-2/3 flex flex-col" style={{ backgroundColor: '#D6C7A7' }}>
+      <div className="border-b px-6 py-4 flex items-center justify-between" style={{ backgroundColor: '#E1D5B8', borderColor: '#A3A86D' }}>
         <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Preview</h2>
         {code && (
           <div className="flex gap-3">
