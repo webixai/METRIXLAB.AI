@@ -33,8 +33,8 @@ export default function PreviewPanel({ code }: PreviewPanelProps) {
   };
 
   return (
-    <div className="w-full lg:w-2/3 flex flex-col" style={{ backgroundColor: '#D6C7A7' }}>
-      <div className="border-b px-6 py-4 flex items-center justify-between" style={{ backgroundColor: '#A3A86D', borderColor: '#8f9352' }}>
+    <div className="w-full lg:w-2/3 flex flex-col" style={{ backgroundColor: '#e6e6e6' }}>
+      <div className="border-b px-6 py-4 flex items-center justify-between" style={{ backgroundColor: '#999999', borderColor: '#7a7a7a' }}>
         <h2 className="text-lg font-semibold text-white">Preview</h2>
         {code && (
           <div className="flex gap-3">
@@ -53,12 +53,12 @@ export default function PreviewPanel({ code }: PreviewPanelProps) {
             <button
               onClick={handleExport}
               className="px-4 py-2 text-sm font-medium text-white rounded-lg transition-colors"
-              style={{ backgroundColor: '#A3A86D' }}
+              style={{ backgroundColor: '#999999' }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#8f9352';
+                e.currentTarget.style.backgroundColor = '#7a7a7a';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = '#A3A86D';
+                e.currentTarget.style.backgroundColor = '#999999';
               }}
             >
               Export HTML

@@ -30,11 +30,11 @@ export default function PromptPanel({ onGenerate, isGenerating, error }: PromptP
   return (
     <div className="w-full lg:w-1/3 bg-white dark:bg-gray-900 p-6 overflow-y-auto border-r border-gray-200 dark:border-gray-700">
       <div className="max-w-2xl mx-auto">
-        <div className="mb-8 -mx-6 -mt-6 px-6 py-4 rounded-t-lg" style={{ backgroundColor: '#A3A86D' }}>
+        <div className="mb-8 -mx-6 -mt-6 px-6 py-4 rounded-t-lg" style={{ backgroundColor: '#999999' }}>
           <h1 className="text-3xl font-bold text-white mb-2">
             METRIXLAB CREATION
           </h1>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-white">
             Describe your dream website and watch it come to life
           </p>
         </div>
@@ -55,7 +55,7 @@ export default function PromptPanel({ onGenerate, isGenerating, error }: PromptP
                       ? "border-gray-400 dark:border-gray-500"
                       : "border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600"
                   }`}
-                  style={selectedTemplate === template.id ? { backgroundColor: '#E1D5B8' } : {}}
+                  style={selectedTemplate === template.id ? { backgroundColor: '#e6e6e6', borderColor: '#999999' } : {}}
                 >
                   <div className="font-semibold text-gray-900 dark:text-white">
                     {template.name}
@@ -93,16 +93,16 @@ export default function PromptPanel({ onGenerate, isGenerating, error }: PromptP
             disabled={!prompt.trim() || isGenerating}
             className="w-full disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-semibold py-3 px-6 rounded-lg transition-colors"
             style={{
-              backgroundColor: !prompt.trim() || isGenerating ? undefined : '#A3A86D',
+              backgroundColor: !prompt.trim() || isGenerating ? undefined : '#999999',
             }}
             onMouseEnter={(e) => {
               if (!(!prompt.trim() || isGenerating)) {
-                e.currentTarget.style.backgroundColor = '#8f9352';
+                e.currentTarget.style.backgroundColor = '#7a7a7a';
               }
             }}
             onMouseLeave={(e) => {
               if (!(!prompt.trim() || isGenerating)) {
-                e.currentTarget.style.backgroundColor = '#A3A86D';
+                e.currentTarget.style.backgroundColor = '#999999';
               }
             }}
           >
@@ -120,9 +120,9 @@ export default function PromptPanel({ onGenerate, isGenerating, error }: PromptP
           </button>
         </form>
 
-        <div className="mt-8 p-4 rounded-lg dark:bg-gray-800" style={{ backgroundColor: '#E1D5B8' }}>
-          <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Tips for better results:</h3>
-          <ul className="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+        <div className="mt-8 p-4 rounded-lg dark:bg-gray-800" style={{ backgroundColor: '#3d4c41', color: '#e6e6e6' }}>
+          <h3 className="font-semibold mb-2" style={{ color: '#e6e6e6' }}>Tips for better results:</h3>
+          <ul className="text-sm space-y-1" style={{ color: '#e6e6e6' }}>
             <li>• Be specific about colors, layout, and style</li>
             <li>• Mention the type of content you need</li>
             <li>• Include any specific sections or features</li>

@@ -26,11 +26,11 @@ IMPORTANT RULES:
 9. Use semantic HTML elements
 
 COLOR PALETTE (MANDATORY - use these colors throughout):
-- Primary Green: #A3A86D
-- Warm Beige: #E1D5B8
-- Soft Sand: #D6C7A7
+- Primary: #999999
+- Secondary: #3d4c41
+- Tertiary: #e6e6e6
 
-Use these colors for backgrounds, text, accents, and buttons. Create a harmonious design with this earthy, sophisticated palette.
+Use these colors for backgrounds, text, accents, and buttons. Create a harmonious modern design with this sophisticated palette.
 
 Template context: ${template || "modern landing page"}`;
 

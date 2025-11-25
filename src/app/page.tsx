@@ -8,7 +8,7 @@ export default function Home() {
     <main 
       className="min-h-screen dark:from-gray-900 dark:to-gray-800"
       style={{
-        background: 'linear-gradient(to bottom right, #E1D5B8, #D6C7A7)',
+        background: 'linear-gradient(to bottom right, #3d4c41, #e6e6e6)',
       }}
     >
       <BuilderInterface />
