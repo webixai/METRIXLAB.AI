@@ -25,6 +25,13 @@ IMPORTANT RULES:
 8. Make it visually appealing and professional
 9. Use semantic HTML elements
 
+COLOR PALETTE (MANDATORY - use these colors throughout):
+- Primary Green: #A3A86D
+- Warm Beige: #E1D5B8
+- Soft Sand: #D6C7A7
+
+Use these colors for backgrounds, text, accents, and buttons. Create a harmonious design with this earthy, sophisticated palette.
+
 Template context: ${template || "modern landing page"}`;
 
     const fullPrompt = `${systemPrompt}\n\nUser Request: ${prompt}`;
