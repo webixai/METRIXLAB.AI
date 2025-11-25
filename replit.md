@@ -9,7 +9,9 @@ A modern AI-powered website builder built with Next.js 15, TypeScript, and Googl
 - **Real-Time Preview**: Instantly see your generated website in a split-screen interface
 - **Code Export**: Copy or download the generated HTML code
 - **Responsive Design**: All generated websites are mobile-friendly with Tailwind CSS
-- **Modern UI**: Clean, intuitive builder interface with dark mode support
+- **Modern UI**: Clean, intuitive builder interface with custom color scheme
+- **User Authentication**: Secure sign-in/sign-up with Clerk authentication
+- **Protected Routes**: Only authenticated users can access the builder
 
 ## Project Architecture
 - **Framework**: Next.js 15 with App Router
@@ -24,26 +26,35 @@ src/
 ├── app/
 │   ├── api/
 │   │   └── generate/
-│   │       └── route.ts       # AI generation API endpoint
-│   ├── globals.css            # Global styles with Tailwind
-│   ├── layout.tsx             # Root layout component
-│   └── page.tsx               # Main page
+│   │       └── route.ts               # AI generation API endpoint
+│   ├── auth/
+│   │   ├── sign-in/[[...sign-in]]/
+│   │   │   └── page.tsx               # Clerk sign-in page
+│   │   └── sign-up/[[...sign-up]]/
+│   │       └── page.tsx               # Clerk sign-up page
+│   ├── globals.css                    # Global styles with Tailwind
+│   ├── layout.tsx                     # Root layout with ClerkProvider
+│   └── page.tsx                       # Landing page or builder (authenticated)
 ├── components/
-│   ├── BuilderInterface.tsx   # Main builder container
-│   ├── PromptPanel.tsx        # Left panel with prompt input
-│   └── PreviewPanel.tsx       # Right panel with preview/code view
-└── lib/
-    └── gemini.ts              # Google Gemini client configuration
+│   ├── BuilderInterface.tsx           # Main builder container
+│   ├── PromptPanel.tsx                # Left panel with prompt input
+│   └── PreviewPanel.tsx               # Right panel with preview/code view
+├── lib/
+│   └── gemini.ts                      # Google Gemini client configuration
+└── middleware.ts                      # Clerk route protection middleware
 ```
 
 ## Recent Changes
+- **2025-11-25**: Added Clerk authentication with Sign In/Sign Up pages and protected routes
+- **2025-11-25**: Updated color scheme to modern theme (#999999, #3d4c41, #e6e6e6)
+- **2025-11-25**: Rebranded to "METRIXLAB CREATION" across all interfaces
 - **2025-11-25**: Switched from OpenAI to Google Gemini 2.5 Flash for free AI generation
 - **2025-11-24**: Initial project setup with Next.js, TypeScript, and Tailwind CSS
-- **2025-11-24**: Built split-screen builder interface with prompt panel and preview
-- **2025-11-24**: Added template selection and code export functionality
 
-## Environment Variables
-- `GEMINI_API_KEY`: Required for AI website generation (stored as secret, free from Google AI Studio)
+## Environment Variables & Secrets
+- `GEMINI_API_KEY`: Required for AI website generation (free from Google AI Studio)
+- `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`: Clerk public key for authentication
+- `CLERK_SECRET_KEY`: Clerk secret key for authentication backend
 
 ## Development
 - Run development server: `npm run dev` (runs on port 5000)
@@ -51,4 +62,10 @@ src/
 - Start production server: `npm start`
 
 ## User Preferences
-None set yet.
+- **Branding**: "METRIXLAB CREATION"
+- **Color Scheme**: 
+  - Primary: #999999 (Gray)
+  - Secondary: #3d4c41 (Dark Green)
+  - Tertiary: #e6e6e6 (Light Gray)
+- **AI Model**: Google Gemini 2.5 Flash (free tier)
+- **Authentication**: Clerk for user management
