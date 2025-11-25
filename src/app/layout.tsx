@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "AI Website Builder",
+  title: "METRIXLAB CREATION",
   description: "Build beautiful websites with AI assistance",
 };
 
