@@ -12,6 +12,9 @@ A modern AI-powered website builder built with Next.js 15, TypeScript, and Googl
 - **Modern UI**: Clean, intuitive builder interface with custom color scheme
 - **User Authentication**: Secure sign-in/sign-up with Clerk authentication
 - **Protected Routes**: Only authenticated users can access the builder
+- **Premium Tier Support**: Free and premium feature tiers with Clerk metadata-based access control
+- **Dashboard**: Personalized user dashboard showing logged-in user's first name
+- **Editor Tools Showcase**: Dedicated `/editor` route displaying free and premium editor capabilities
 
 ## Project Architecture
 - **Framework**: Next.js 15 with App Router
@@ -34,6 +37,8 @@ src/
 │   │       └── page.tsx               # Clerk sign-up page
 │   ├── dashboard/
 │   │   └── page.tsx                   # User dashboard (server-side authenticated)
+│   ├── editor/
+│   │   └── page.tsx                   # Editor tools showcase (free & premium)
 │   ├── globals.css                    # Global styles with Tailwind
 │   ├── layout.tsx                     # Root layout with ClerkProvider (client component)
 │   └── page.tsx                       # Landing page or builder (authenticated)
@@ -42,16 +47,19 @@ src/
 │       ├── BuilderInterface.tsx       # Main builder container
 │       ├── PromptPanel.tsx            # Left panel with prompt input and templates
 │       ├── PreviewPanel.tsx           # Right panel with preview/code view
-│       ├── PremiumTools.tsx           # Premium feature showcase component
-│       ├── FreeTools.tsx              # Free feature showcase component
-│       └── index.ts                   # Barrel export for clean imports
+│       ├── PremiumTools.tsx           # Premium tools (server-side, direct import only)
+│       ├── FreeTools.tsx              # Free editor tools showcase
+│       └── index.ts                   # Barrel export (excludes PremiumTools)
 ├── lib/
 │   └── gemini.ts                      # Google Gemini client configuration
 └── middleware.ts                      # Clerk route protection middleware
 ```
 
 ## Recent Changes
-- **2025-11-25**: Reorganized components into `src/components/editor/` for better structure
+- **2025-11-25**: Created `/editor` route with FreeTools and PremiumTools showcase
+- **2025-11-25**: Implemented premium tier gating with Clerk user metadata checks
+- **2025-11-25**: Fixed server-side component import patterns (PremiumTools imported directly, not via barrel)
+- **2025-11-25**: Reorganized components into `src/components/editor/` with barrel exports (excluding PremiumTools)
 - **2025-11-25**: Created PremiumTools.tsx and FreeTools.tsx components for feature showcase
 - **2025-11-25**: Added server-side dashboard route with Clerk authentication
 - **2025-11-25**: Updated layout.tsx to use client component pattern for Clerk compatibility
@@ -66,10 +74,23 @@ src/
 - `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`: Clerk public key for authentication
 - `CLERK_SECRET_KEY`: Clerk secret key for authentication backend
 
+## Routes
+- `/` - Landing page with Sign In/Sign Up (unauthenticated) or AI builder (authenticated)
+- `/auth/sign-in` - Clerk sign-in page
+- `/auth/sign-up` - Clerk sign-up page
+- `/dashboard` - User dashboard (authenticated, server-side)
+- `/editor` - Editor tools showcase with free and premium features (authenticated)
+
 ## Development
 - Run development server: `npm run dev` (runs on port 5000)
 - Build for production: `npm run build`
 - Start production server: `npm start`
+
+## Important Notes
+- **PremiumTools Component**: Must be imported directly, not via barrel export (server-side component constraint)
+- **FreeTools Component**: Can be imported via barrel export from `@/components/editor`
+- **Upgrade Route**: `/upgrade` is referenced but not yet implemented (add when implementing payments)
+- **Premium Metadata**: Users marked with `isPremium: true` in Clerk publicMetadata will see premium tools
 
 ## User Preferences
 - **Branding**: "METRIXLAB CREATION"
