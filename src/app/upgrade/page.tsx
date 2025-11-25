@@ -1,6 +1,6 @@
 "use client";
 
-import UpgradeButton from "@/components/UpgradeButton";
+import RazorpayButton from "@/components/RazorpayButton";
 import { UserButton } from "@clerk/nextjs";
 
 export default function UpgradePage() {
@@ -29,15 +29,15 @@ export default function UpgradePage() {
             </ul>
             
             <div className="mb-8 pb-8 border-b border-gray-300">
-              <p className="text-3xl font-bold text-gray-900 mb-2">$9.99<span className="text-lg">/month</span></p>
-              <p className="text-gray-600">Start your free trial for 7 days</p>
+              <p className="text-3xl font-bold text-gray-900 mb-2">₹1,500<span className="text-lg">/month</span></p>
+              <p className="text-gray-600">Secure payment powered by Razorpay</p>
             </div>
             
-            <UpgradeButton />
+            <RazorpayButton />
           </div>
           
           <p className="text-white text-sm">
-            Cancel anytime. No credit card required for trial.
+            Cancel anytime. Secure and trusted payment.
           </p>
         </div>
       </div>

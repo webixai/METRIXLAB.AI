@@ -56,6 +56,10 @@ src/
 ```
 
 ## Recent Changes
+- **2025-11-25**: Migrated payment processing from Stripe to Razorpay
+- **2025-11-25**: Created `/upgrade` page with premium pricing (₹1,500/month)
+- **2025-11-25**: Implemented RazorpayButton component for secure payment checkout
+- **2025-11-25**: Created `/api/razorpay` endpoint for order creation
 - **2025-11-25**: Created `/editor` route with FreeTools and PremiumTools showcase
 - **2025-11-25**: Implemented premium tier gating with Clerk user metadata checks
 - **2025-11-25**: Fixed server-side component import patterns (PremiumTools imported directly, not via barrel)
@@ -73,6 +77,9 @@ src/
 - `GEMINI_API_KEY`: Required for AI website generation (free from Google AI Studio)
 - `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`: Clerk public key for authentication
 - `CLERK_SECRET_KEY`: Clerk secret key for authentication backend
+- `RAZORPAY_KEY_ID`: Razorpay key ID for payment processing
+- `RAZORPAY_KEY_SECRET`: Razorpay key secret for payment processing
+- `NEXT_PUBLIC_RAZORPAY_KEY_ID`: Razorpay public key ID for frontend checkout
 
 ## Routes
 - `/` - Landing page with Sign In/Sign Up (unauthenticated) or AI builder (authenticated)
@@ -80,8 +87,9 @@ src/
 - `/auth/sign-up` - Clerk sign-up page
 - `/dashboard` - User dashboard (authenticated, server-side)
 - `/editor` - Editor tools showcase with free and premium features (authenticated)
+- `/upgrade` - Premium upgrade page with pricing and Razorpay checkout
 - `/api/generate` - AI website generation endpoint
-- `/api/checkout` - Stripe checkout session creation for premium upgrades
+- `/api/razorpay` - Razorpay order creation endpoint for premium subscriptions
 
 ## Development
 - Run development server: `npm run dev` (runs on port 5000)
