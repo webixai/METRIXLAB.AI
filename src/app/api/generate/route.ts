@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import openai from "@/lib/openai";
+import ai from "@/lib/gemini";
 
 export async function POST(request: NextRequest) {
   try {
@@ -27,17 +27,15 @@ IMPORTANT RULES:
 
 Template context: ${template || "modern landing page"}`;
 
-    // the newest OpenAI model is "gpt-5" which was released August 7, 2025. do not change this unless explicitly requested by the user
-    const response = await openai.chat.completions.create({
-      model: "gpt-5",
-      messages: [
-        { role: "system", content: systemPrompt },
-        { role: "user", content: prompt },
-      ],
-      max_completion_tokens: 4096,
+    const fullPrompt = `${systemPrompt}\n\nUser Request: ${prompt}`;
+
+    // Using Gemini 2.5 Flash - the newest Gemini model series
+    const response = await ai.models.generateContent({
+      model: "gemini-2.5-flash",
+      contents: fullPrompt,
     });
 
-    const generatedCode = response.choices[0].message.content;
+    const generatedCode = response.text || "";
 
     return NextResponse.json({ code: generatedCode });
   } catch (error: any) {
