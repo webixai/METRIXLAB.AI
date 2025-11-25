@@ -80,6 +80,8 @@ src/
 - `/auth/sign-up` - Clerk sign-up page
 - `/dashboard` - User dashboard (authenticated, server-side)
 - `/editor` - Editor tools showcase with free and premium features (authenticated)
+- `/api/generate` - AI website generation endpoint
+- `/api/checkout` - Stripe checkout session creation for premium upgrades
 
 ## Development
 - Run development server: `npm run dev` (runs on port 5000)
