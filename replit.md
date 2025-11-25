@@ -32,19 +32,29 @@ src/
 │   │   │   └── page.tsx               # Clerk sign-in page
 │   │   └── sign-up/[[...sign-up]]/
 │   │       └── page.tsx               # Clerk sign-up page
+│   ├── dashboard/
+│   │   └── page.tsx                   # User dashboard (server-side authenticated)
 │   ├── globals.css                    # Global styles with Tailwind
-│   ├── layout.tsx                     # Root layout with ClerkProvider
+│   ├── layout.tsx                     # Root layout with ClerkProvider (client component)
 │   └── page.tsx                       # Landing page or builder (authenticated)
 ├── components/
-│   ├── BuilderInterface.tsx           # Main builder container
-│   ├── PromptPanel.tsx                # Left panel with prompt input
-│   └── PreviewPanel.tsx               # Right panel with preview/code view
+│   └── editor/
+│       ├── BuilderInterface.tsx       # Main builder container
+│       ├── PromptPanel.tsx            # Left panel with prompt input and templates
+│       ├── PreviewPanel.tsx           # Right panel with preview/code view
+│       ├── PremiumTools.tsx           # Premium feature showcase component
+│       ├── FreeTools.tsx              # Free feature showcase component
+│       └── index.ts                   # Barrel export for clean imports
 ├── lib/
 │   └── gemini.ts                      # Google Gemini client configuration
 └── middleware.ts                      # Clerk route protection middleware
 ```
 
 ## Recent Changes
+- **2025-11-25**: Reorganized components into `src/components/editor/` for better structure
+- **2025-11-25**: Created PremiumTools.tsx and FreeTools.tsx components for feature showcase
+- **2025-11-25**: Added server-side dashboard route with Clerk authentication
+- **2025-11-25**: Updated layout.tsx to use client component pattern for Clerk compatibility
 - **2025-11-25**: Added Clerk authentication with Sign In/Sign Up pages and protected routes
 - **2025-11-25**: Updated color scheme to modern theme (#999999, #3d4c41, #e6e6e6)
 - **2025-11-25**: Rebranded to "METRIXLAB CREATION" across all interfaces
@@ -67,5 +77,7 @@ src/
   - Primary: #999999 (Gray)
   - Secondary: #3d4c41 (Dark Green)
   - Tertiary: #e6e6e6 (Light Gray)
-- **AI Model**: Google Gemini 2.5 Flash (free tier)
-- **Authentication**: Clerk for user management
+- **AI Model**: Google Gemini 2.5 Flash (free tier with 1M tokens/min)
+- **Authentication**: Clerk for user management with server-side and client-side auth patterns
+- **Code Organization**: Editor components organized in `src/components/editor/` with barrel exports
+- **Component Structure**: Using both client and server components appropriately for performance

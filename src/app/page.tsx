@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useAuth, UserButton } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-import BuilderInterface from "@/components/BuilderInterface";
+import { BuilderInterface } from "@/components/editor";
 
 export default function Home() {
   const { isSignedIn, isLoaded } = useAuth();
