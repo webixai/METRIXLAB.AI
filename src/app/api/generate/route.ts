@@ -35,13 +35,21 @@ Template context: ${template || "modern landing page"}`;
       contents: fullPrompt,
     });
 
-    const generatedCode = response.text || "";
+    if (!response || !response.candidates || response.candidates.length === 0) {
+      throw new Error("No response from AI model");
+    }
 
-    return NextResponse.json({ code: generatedCode });
+    const text = response.candidates[0]?.content?.parts[0]?.text;
+    if (!text) {
+      throw new Error("No text content generated");
+    }
+
+    return NextResponse.json({ code: text });
   } catch (error: any) {
     console.error("Error generating website:", error);
+    const errorMessage = error?.message || error?.toString?.() || "Failed to generate website";
     return NextResponse.json(
-      { error: error.message || "Failed to generate website" },
+      { error: errorMessage },
       { status: 500 }
     );
   }
