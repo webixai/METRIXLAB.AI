@@ -30,8 +30,8 @@ export default function PromptPanel({ onGenerate, isGenerating, error }: PromptP
   return (
     <div className="w-full lg:w-1/3 bg-white dark:bg-gray-900 p-6 overflow-y-auto border-r border-gray-200 dark:border-gray-700">
       <div className="max-w-2xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+        <div className="mb-8 -mx-6 -mt-6 px-6 py-4 rounded-t-lg" style={{ backgroundColor: '#A3A86D' }}>
+          <h1 className="text-3xl font-bold text-white mb-2">
             METRIXLAB CREATION
           </h1>
           <p className="text-gray-600 dark:text-gray-400">
