@@ -29,7 +29,7 @@ export default function UpgradePage() {
             </ul>
             
             <div className="mb-8 pb-8 border-b border-gray-300">
-              <p className="text-3xl font-bold text-gray-900 mb-2">₹1,500<span className="text-lg">/month</span></p>
+              <p className="text-3xl font-bold text-gray-900 mb-2">₹600<span className="text-lg">/month</span></p>
               <p className="text-gray-600">Secure payment powered by Razorpay</p>
             </div>
             

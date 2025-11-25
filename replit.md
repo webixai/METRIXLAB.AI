@@ -56,8 +56,9 @@ src/
 ```
 
 ## Recent Changes
+- **2025-11-25**: Updated premium pricing to ₹600/month
 - **2025-11-25**: Migrated payment processing from Stripe to Razorpay
-- **2025-11-25**: Created `/upgrade` page with premium pricing (₹1,500/month)
+- **2025-11-25**: Created `/upgrade` page with premium pricing (₹600/month)
 - **2025-11-25**: Implemented RazorpayButton component for secure payment checkout
 - **2025-11-25**: Created `/api/razorpay` endpoint for order creation
 - **2025-11-25**: Created `/editor` route with FreeTools and PremiumTools showcase
