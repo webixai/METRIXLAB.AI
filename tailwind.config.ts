@@ -17,8 +17,9 @@ const config: Config = {
         muted: "#CBD5E1",        // Gentle gray for dividers and subtle details
       },
       fontFamily: {
-        sans: ["Inter", "sans-serif"],
-        display: ["Playfair Display", "serif"],
+        display: ['Narnia', 'Ardent', 'Bropella'],
+        body: ['Beckan', 'Titan One'],
+        accent: ['Rammetto One'],
       },
       boxShadow: {
         card: "0 4px 14px rgba(0,0,0,0.08)",
