@@ -93,6 +93,7 @@ src/
 - `/dashboard` - User dashboard (authenticated, server-side)
 - `/editor` - Editor tools showcase with free and premium features (authenticated)
 - `/upgrade` - Premium upgrade page with pricing and Razorpay checkout
+- `/style-guide` - Typography and color palette style guide
 - `/api/generate` - AI website generation endpoint
 - `/api/razorpay` - Razorpay order creation endpoint for premium subscriptions
 
