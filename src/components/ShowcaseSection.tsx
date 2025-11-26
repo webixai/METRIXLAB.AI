@@ -13,6 +13,7 @@ export default function ShowcaseSection() {
         <ScrollReveal delay={0.3}><div className="card p-6">Restaurant Site</div></ScrollReveal>
         <ScrollReveal delay={0.4}><div className="card p-6">Medical Clinic</div></ScrollReveal>
         <ScrollReveal delay={0.5}><div className="card p-6">Fitness Studio</div></ScrollReveal>
+        <ScrollReveal delay={0.6}><div className="card p-6">Custom Design</div></ScrollReveal>
       </div>
     </section>
   );
