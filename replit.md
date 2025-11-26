@@ -56,6 +56,10 @@ src/
 ```
 
 ## Recent Changes
+- **2025-11-26**: Integrated Framer Motion animations (fade + slide) throughout app
+- **2025-11-26**: Created MotionWrapper component for reusable entrance animations
+- **2025-11-26**: Added HeroSection component with animated staggered text
+- **2025-11-26**: Applied animations to landing page, showcase cards, and buttons
 - **2025-11-25**: Updated premium pricing to ₹600/month
 - **2025-11-25**: Migrated payment processing from Stripe to Razorpay
 - **2025-11-25**: Created `/upgrade` page with premium pricing (₹600/month)
