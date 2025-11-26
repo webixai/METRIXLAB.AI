@@ -9,7 +9,7 @@ export default async function PremiumTools() {
       <div className="opacity-40 pointer-events-none">
         <h2 className="text-xl font-bold mb-4 text-gray-400">🔒 Premium Tools (Locked)</h2>
         <p className="text-gray-400 mb-4">
-          Unlock these features by upgrading to SiteForge Premium.
+          Unlock these features by upgrading to MetrixLab Premium.
         </p>
         <a
           href="/upgrade"

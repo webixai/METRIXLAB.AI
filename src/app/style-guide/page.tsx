@@ -16,7 +16,7 @@ export default function StyleGuidePage() {
         variants={fadeIn}
         className="text-center space-y-6"
       >
-        <h1 className="text-5xl font-[Narnia] text-primary">SiteForge AI</h1>
+        <h1 className="text-5xl font-[Narnia] text-primary">MetrixLab AI</h1>
         <p className="text-lg text-gray-600 italic font-[Beckan]">
           "Create. Edit. Publish. All with AI."
         </p>
@@ -25,7 +25,7 @@ export default function StyleGuidePage() {
           <div className="p-8 bg-[#F8F6F2] rounded-2xl shadow-lg border border-[#E1D5B8] flex flex-col items-center justify-center">
             <img
               src="/logo.svg"
-              alt="SiteForge Logo"
+              alt="MetrixLab Logo"
               className="h-20 w-auto mb-4 opacity-90"
             />
             <p className="text-sm text-gray-700 font-[Beckan]">Primary Logo</p>
