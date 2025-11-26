@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useAuth, UserButton } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { BuilderInterface } from "@/components/editor";
+import ShowcaseSection from "@/components/ShowcaseSection";
 
 export default function Home() {
   const { isSignedIn, isLoaded } = useAuth();
@@ -24,36 +25,28 @@ export default function Home() {
 
   if (!isSignedIn) {
     return (
-      <main 
-        className="min-h-screen flex flex-col items-center justify-center gap-6"
-        style={{
-          background: 'linear-gradient(to bottom right, #3d4c41, #e6e6e6)',
-        }}
-      >
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-white mb-4">METRIXLAB CREATION</h1>
-          <p className="text-white text-lg mb-8">Build amazing websites with AI</p>
-          <div className="flex gap-4 justify-center">
-            <button
-              onClick={() => router.push('/auth/sign-in')}
-              className="px-6 py-3 rounded-lg text-white font-semibold transition-colors"
-              style={{ backgroundColor: '#999999' }}
-              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#7a7a7a'}
-              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#999999'}
-            >
-              Sign In
-            </button>
-            <button
-              onClick={() => router.push('/auth/sign-up')}
-              className="px-6 py-3 rounded-lg text-white font-semibold transition-colors"
-              style={{ backgroundColor: '#999999' }}
-              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#7a7a7a'}
-              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#999999'}
-            >
-              Sign Up
-            </button>
+      <main className="min-h-screen bg-background">
+        <div className="min-h-screen flex flex-col items-center justify-center gap-6 py-20 px-4">
+          <div className="text-center max-w-2xl">
+            <h1 className="text-4xl md:text-5xl font-display font-bold mb-4 text-primary">METRIXLAB CREATION</h1>
+            <p className="text-xl mb-8 text-text">Build stunning, AI-powered websites in seconds</p>
+            <div className="flex gap-4 justify-center flex-wrap">
+              <button
+                onClick={() => router.push('/auth/sign-in')}
+                className="px-8 py-3 rounded-xl text-white font-semibold bg-primary hover:bg-primary/90 transition"
+              >
+                Sign In
+              </button>
+              <button
+                onClick={() => router.push('/auth/sign-up')}
+                className="px-8 py-3 rounded-xl text-white font-semibold bg-secondary hover:bg-secondary/90 transition"
+              >
+                Sign Up
+              </button>
+            </div>
           </div>
         </div>
+        <ShowcaseSection />
       </main>
     );
   }
