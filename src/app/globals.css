@@ -1,7 +1,7 @@
 /* ===========================
    GOOGLE FONTS IMPORTS
    =========================== */
-@import url('https://fonts.googleapis.com/css2?family=Titillium+One&family=Rammetto+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Titan+One&family=Rammetto+One&display=swap');
 
 /* ===========================
    CUSTOM FONT DECLARATIONS
@@ -51,7 +51,7 @@
 
 /* General body text uses Beckan for balance */
 body {
-  font-family: 'Beckan', 'Titillium One', sans-serif;
+  font-family: 'Beckan', 'Titan One', sans-serif;
   color: var(--color-text);
   background-color: var(--color-bg);
   font-size: 1rem;
@@ -93,7 +93,7 @@ h3, h4 {
 
 /* Clean and simple body paragraphs can use Titan One */
 p, li, .paragraph {
-  font-family: 'Beckan', 'Titillium One', sans-serif;
+  font-family: 'Beckan', 'Titan One', sans-serif;
 }
 
 /* CTAs and button texts get Rammetto One for punchy emphasis */
@@ -145,7 +145,7 @@ button, .cta, .cta-text {
 }
 
 .nav-item {
-  font-family: 'Beckan', 'Titillium One', serif;
+  font-family: 'Beckan', 'Titan One', serif;
   color: var(--color-text);
   font-size: 1rem;
   font-weight: 500;
