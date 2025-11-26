@@ -6,6 +6,7 @@ import { BuilderInterface } from "@/components/editor";
 import ShowcaseSection from "@/components/ShowcaseSection";
 import HeroSection from "@/components/HeroSection";
 import ParallaxSection from "@/components/ParallaxSection";
+import Navbar from "@/components/Navbar";
 
 export default function Home() {
   const { isSignedIn, isLoaded } = useAuth();
@@ -26,15 +27,18 @@ export default function Home() {
 
   if (!isSignedIn) {
     return (
-      <main className="min-h-screen bg-background space-y-20">
-        <HeroSection />
-        <ParallaxSection
-          backgroundImage="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80"
-          title="Design Beautifully"
-          subtitle="Bring your imagination to life with AI-powered creativity."
-        />
-        <ShowcaseSection />
-      </main>
+      <>
+        <Navbar />
+        <main className="min-h-screen bg-background space-y-20 pt-24">
+          <HeroSection />
+          <ParallaxSection
+            backgroundImage="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80"
+            title="Design Beautifully"
+            subtitle="Bring your imagination to life with AI-powered creativity."
+          />
+          <ShowcaseSection />
+        </main>
+      </>
     );
   }
 
