@@ -1,34 +1,7 @@
 /* ===========================
    GOOGLE FONTS IMPORTS
    =========================== */
-@import url('https://fonts.googleapis.com/css2?family=Titan+One&family=Rammetto+One&display=swap');
-
-/* ===========================
-   CUSTOM FONT DECLARATIONS
-   =========================== */
-@font-face {
-  font-family: 'Narnia';
-  src: url('/fonts/Narnia.ttf') format('truetype');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Beckan';
-  src: url('/fonts/Beckan.ttf') format('truetype');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Bropella';
-  src: url('/fonts/Bropella.ttf') format('truetype');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Ardent';
-  src: url('/fonts/Ardent.ttf') format('truetype');
-  font-display: swap;
-}
+@import url('https://fonts.googleapis.com/css2?family=Titan+One&family=Rammetto+One&family=Playfair+Display:wght@700&family=Poppins:wght@400;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -49,9 +22,9 @@
    FONT USAGE MAPPING
    =========================== */
 
-/* General body text uses Beckan for balance */
+/* General body text uses Poppins for balance */
 body {
-  font-family: 'Beckan', 'Titan One', sans-serif;
+  font-family: 'Poppins', 'Titan One', sans-serif;
   color: var(--color-text);
   background-color: var(--color-bg);
   font-size: 1rem;
@@ -62,17 +35,17 @@ body {
   padding: 0;
 }
 
-/* Hero titles and brand names stay majestic with Narnia */
+/* Hero titles and brand names stay majestic with Playfair Display */
 h1, .hero-title, .brand-title {
-  font-family: 'Narnia', serif;
+  font-family: 'Playfair Display', serif;
   letter-spacing: 1px;
   line-height: 1.2;
   margin-bottom: 0.8em;
 }
 
-/* Subtitles, taglines, and section headers use Bropella */
+/* Subtitles, taglines, and section headers use Titan One */
 h2, .subtitle, .tagline {
-  font-family: 'Bropella', cursive;
+  font-family: 'Titan One', cursive;
   line-height: 1.2;
   letter-spacing: 0.3px;
   margin-bottom: 0.8em;
@@ -80,20 +53,20 @@ h2, .subtitle, .tagline {
 
 /* Additional heading styles */
 h3, h4 {
-  font-family: 'Bropella', serif;
+  font-family: 'Titan One', serif;
   line-height: 1.2;
   letter-spacing: 0.3px;
   margin-bottom: 0.8em;
 }
 
-/* Artistic accent lines or highlights use Ardent */
+/* Artistic accent lines or highlights use Playfair Display */
 .accent-text, .highlight {
-  font-family: 'Ardent', serif;
+  font-family: 'Playfair Display', serif;
 }
 
-/* Clean and simple body paragraphs can use Titan One */
+/* Clean and simple body paragraphs use Poppins */
 p, li, .paragraph {
-  font-family: 'Beckan', 'Titan One', sans-serif;
+  font-family: 'Poppins', 'Titan One', sans-serif;
 }
 
 /* CTAs and button texts get Rammetto One for punchy emphasis */
@@ -145,7 +118,7 @@ button, .cta, .cta-text {
 }
 
 .nav-item {
-  font-family: 'Beckan', 'Titan One', serif;
+  font-family: 'Poppins', 'Titan One', serif;
   color: var(--color-text);
   font-size: 1rem;
   font-weight: 500;
