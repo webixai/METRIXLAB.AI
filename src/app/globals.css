@@ -1,7 +1,7 @@
 /* ===========================
    GOOGLE FONTS IMPORTS
    =========================== */
-@import url('https://fonts.googleapis.com/css2?family=Titan+One&family=Rammetto+One&family=Playfair+Display:wght@700&family=Poppins:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@600;700&family=Rammetto+One&family=Playfair+Display:wght@700&family=Poppins:wght@400;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -24,7 +24,7 @@
 
 /* General body text uses Poppins for balance */
 body {
-  font-family: 'Poppins', 'Titan One', sans-serif;
+  font-family: 'Poppins', 'Raleway', sans-serif;
   color: var(--color-text);
   background-color: var(--color-bg);
   font-size: 1rem;
@@ -43,9 +43,10 @@ h1, .hero-title, .brand-title {
   margin-bottom: 0.8em;
 }
 
-/* Subtitles, taglines, and section headers use Titan One */
+/* Subtitles, taglines, and section headers use Raleway */
 h2, .subtitle, .tagline {
-  font-family: 'Titan One', cursive;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
   line-height: 1.2;
   letter-spacing: 0.3px;
   margin-bottom: 0.8em;
@@ -53,7 +54,8 @@ h2, .subtitle, .tagline {
 
 /* Additional heading styles */
 h3, h4 {
-  font-family: 'Titan One', serif;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
   line-height: 1.2;
   letter-spacing: 0.3px;
   margin-bottom: 0.8em;
@@ -66,7 +68,7 @@ h3, h4 {
 
 /* Clean and simple body paragraphs use Poppins */
 p, li, .paragraph {
-  font-family: 'Poppins', 'Titan One', sans-serif;
+  font-family: 'Poppins', 'Raleway', sans-serif;
 }
 
 /* CTAs and button texts get Rammetto One for punchy emphasis */
@@ -118,7 +120,7 @@ button, .cta, .cta-text {
 }
 
 .nav-item {
-  font-family: 'Poppins', 'Titan One', serif;
+  font-family: 'Poppins', 'Raleway', sans-serif;
   color: var(--color-text);
   font-size: 1rem;
   font-weight: 500;

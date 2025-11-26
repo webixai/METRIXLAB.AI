@@ -17,8 +17,8 @@ const config: Config = {
         muted: "#CBD5E1",        // Gentle gray for dividers and subtle details
       },
       fontFamily: {
-        display: ['Playfair Display', 'Titan One'],
-        body: ['Poppins', 'Titan One'],
+        display: ['Playfair Display', 'Raleway'],
+        body: ['Poppins', 'Raleway'],
         accent: ['Rammetto One'],
       },
       boxShadow: {
