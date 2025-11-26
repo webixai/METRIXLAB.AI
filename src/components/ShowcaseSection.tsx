@@ -103,7 +103,7 @@ export default function ShowcaseSection() {
                 <div
                   className="bg-gradient-to-r p-6"
                   style={{
-                    backgroundImage: `linear-gradient(135deg, #A3A86D 0%, #E1D5B8 100%)`,
+                    backgroundImage: `linear-gradient(135deg, #FBBF24 0%, #C4B5FD 100%)`,
                   }}
                 >
                   <h3 className="text-2xl font-display text-white mb-2">
@@ -132,7 +132,7 @@ export default function ShowcaseSection() {
                       placeholder={`Describe the perfect ${selectedTemplate.toLowerCase()} for your needs...`}
                       className="w-full px-4 py-3 border-2 rounded-lg font-body focus:outline-none focus:border-2 transition-colors resize-none disabled:opacity-50 disabled:cursor-not-allowed"
                       style={{
-                        borderColor: "#A3A86D",
+                        borderColor: "#FBBF24",
                         backgroundColor: "#F8F6F2",
                         color: "#1a1a1a",
                       }}
@@ -156,11 +156,11 @@ export default function ShowcaseSection() {
                     disabled={isGenerating}
                     className="flex-1 px-4 py-2 border-2 rounded-lg font-accent font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     style={{
-                      borderColor: "#A3A86D",
-                      color: "#A3A86D",
+                      borderColor: "#C4B5FD",
+                      color: "#C4B5FD",
                       backgroundColor: "transparent",
                     }}
-                    whileHover={{ backgroundColor: "#F8F6F2" }}
+                    whileHover={{ backgroundColor: "#F3E8FF" }}
                     whileTap={{ scale: 0.95 }}
                   >
                     Cancel
@@ -171,7 +171,7 @@ export default function ShowcaseSection() {
                     disabled={isGenerating || !prompt.trim()}
                     className="flex-1 px-4 py-2 rounded-lg font-accent font-semibold text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                     style={{
-                      backgroundImage: `linear-gradient(135deg, #A3A86D 0%, #E1D5B8 100%)`,
+                      backgroundImage: `linear-gradient(135deg, #FBBF24 0%, #C4B5FD 100%)`,
                     }}
                     whileHover={{ scale: isGenerating ? 1 : 1.05 }}
                     whileTap={{ scale: 0.95 }}
