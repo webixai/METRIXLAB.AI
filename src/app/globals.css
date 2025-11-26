@@ -1,12 +1,42 @@
-@import url('https://fonts.cdnfonts.com/css/bropella');
-@import url('https://fonts.cdnfonts.com/css/beckan');
-@import url('https://fonts.cdnfonts.com/css/narnia');
+/* ===========================
+   GOOGLE FONTS IMPORTS
+   =========================== */
+@import url('https://fonts.googleapis.com/css2?family=Titillium+One&family=Rammetto+One&display=swap');
+
+/* ===========================
+   CUSTOM FONT DECLARATIONS
+   =========================== */
+@font-face {
+  font-family: 'Narnia';
+  src: url('/fonts/Narnia.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Beckan';
+  src: url('/fonts/Beckan.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bropella';
+  src: url('/fonts/Bropella.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Ardent';
+  src: url('/fonts/Ardent.ttf') format('truetype');
+  font-display: swap;
+}
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Root Colors */
+/* ===========================
+   ROOT COLORS & THEME VARIABLES
+   =========================== */
 :root {
   --color-primary: #A3A86D;
   --color-accent: #E1D5B8;
@@ -15,11 +45,15 @@
   --color-text: #1a1a1a;
 }
 
-/* Global Font Settings */
+/* ===========================
+   FONT USAGE MAPPING
+   =========================== */
+
+/* General body text uses Beckan for balance */
 body {
-  background-color: var(--color-bg);
+  font-family: 'Beckan', 'Titillium One', sans-serif;
   color: var(--color-text);
-  font-family: 'Beckan', 'Times New Roman', serif;
+  background-color: var(--color-bg);
   font-size: 1rem;
   line-height: 1.6;
   letter-spacing: 0.2px;
@@ -28,22 +62,50 @@ body {
   padding: 0;
 }
 
-/* Headings – Artistic and Scalable */
-h1, h2, h3, h4 {
-  font-family: 'Bropella', 'Georgia', serif;
+/* Hero titles and brand names stay majestic with Narnia */
+h1, .hero-title, .brand-title {
+  font-family: 'Narnia', serif;
+  letter-spacing: 1px;
+  line-height: 1.2;
+  margin-bottom: 0.8em;
+}
+
+/* Subtitles, taglines, and section headers use Bropella */
+h2, .subtitle, .tagline {
+  font-family: 'Bropella', cursive;
   line-height: 1.2;
   letter-spacing: 0.3px;
   margin-bottom: 0.8em;
 }
 
-/* Hero Headline – Signature Font */
-.hero h1 {
-  font-family: 'Narnia', 'Bropella', serif;
-  font-weight: 700;
-  letter-spacing: 0.6px;
+/* Additional heading styles */
+h3, h4 {
+  font-family: 'Bropella', serif;
+  line-height: 1.2;
+  letter-spacing: 0.3px;
+  margin-bottom: 0.8em;
 }
 
-/* Responsive Typography */
+/* Artistic accent lines or highlights use Ardent */
+.accent-text, .highlight {
+  font-family: 'Ardent', serif;
+}
+
+/* Clean and simple body paragraphs can use Titan One */
+p, li, .paragraph {
+  font-family: 'Beckan', 'Titillium One', sans-serif;
+}
+
+/* CTAs and button texts get Rammetto One for punchy emphasis */
+button, .cta, .cta-text {
+  font-family: 'Rammetto One', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ===========================
+   RESPONSIVE TYPOGRAPHY
+   =========================== */
 @media (max-width: 1200px) {
   h1 { font-size: 2.8rem; }
   h2 { font-size: 2.2rem; }
@@ -62,7 +124,9 @@ h1, h2, h3, h4 {
   p, li { font-size: 0.9rem; }
 }
 
-/* Glassmorphism Navbar */
+/* ===========================
+   GLASSMORPHISM NAVBAR
+   =========================== */
 .navbar {
   position: fixed;
   top: 0;
@@ -81,7 +145,7 @@ h1, h2, h3, h4 {
 }
 
 .nav-item {
-  font-family: 'Beckan', 'Georgia', serif;
+  font-family: 'Beckan', 'Titillium One', serif;
   color: var(--color-text);
   font-size: 1rem;
   font-weight: 500;
