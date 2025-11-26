@@ -2,26 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+html, body {
+  background-color: #F9F7F3;
+  color: #1E293B;
+  font-family: 'Inter', sans-serif;
+  scroll-behavior: smooth;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+section {
+  padding: 5rem 1rem;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.card {
+  @apply bg-white rounded-xl shadow-card transition-transform duration-300 hover:scale-[1.02];
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.grid-art {
+  @apply grid gap-8 sm:grid-cols-2 lg:grid-cols-3;
+}
+
+.hero {
+  @apply flex flex-col items-center justify-center text-center py-20 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-xl shadow-soft;
+}
+
+button.primary {
+  @apply bg-primary text-white px-6 py-3 rounded-xl font-medium hover:bg-primary/90 transition;
+}
+
+button.secondary {
+  @apply bg-secondary text-white px-6 py-3 rounded-xl font-medium hover:bg-secondary/90 transition;
 }
