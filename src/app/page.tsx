@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { BuilderInterface } from "@/components/editor";
 import ShowcaseSection from "@/components/ShowcaseSection";
 import HeroSection from "@/components/HeroSection";
+import ParallaxSection from "@/components/ParallaxSection";
 
 export default function Home() {
   const { isSignedIn, isLoaded } = useAuth();
@@ -27,6 +28,11 @@ export default function Home() {
     return (
       <main className="min-h-screen bg-background space-y-20">
         <HeroSection />
+        <ParallaxSection
+          backgroundImage="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80"
+          title="Design Beautifully"
+          subtitle="Bring your imagination to life with AI-powered creativity."
+        />
         <ShowcaseSection />
       </main>
     );
