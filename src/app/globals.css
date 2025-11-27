@@ -11,10 +11,10 @@
    ROOT COLORS & THEME VARIABLES
    =========================== */
 :root {
-  --color-primary: #A3A86D;
-  --color-accent: #E1D5B8;
-  --color-soft: #D6C7A7;
-  --color-bg: #F8F6F2;
+  --color-primary: #3d4c41;
+  --color-accent: #FFFFFF;
+  --color-soft: #e0e0e0;
+  --color-bg: #FFFFFF;
   --color-text: #1a1a1a;
 }
 
@@ -25,8 +25,8 @@
 /* General body text uses Poppins for balance */
 body {
   font-family: 'Poppins', 'Raleway', sans-serif;
-  color: var(--color-text);
-  background-color: var(--color-bg);
+  color: #1a1a1a;
+  background-color: #FFFFFF;
   font-size: 1rem;
   line-height: 1.6;
   letter-spacing: 0.2px;
