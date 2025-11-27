@@ -44,7 +44,7 @@ export default function ShowcaseSection() {
       if (response.ok) {
         const data = await response.json();
         // Store the generated HTML and redirect to preview
-        localStorage.setItem("generatedHTML", data.html);
+        localStorage.setItem("generatedHTML", data.code);
         window.location.href = "/preview";
       } else {
         alert("Failed to generate website. Please try again.");
