@@ -206,10 +206,7 @@ export default function ShowcaseSection() {
                         <span>Generating...</span>
                       </>
                     ) : (
-                      <>
-                        <span>✨</span>
-                        <span>Let the Magic Happen</span>
-                      </>
+                      <span>GENERATE</span>
                     )}
                   </motion.button>
                 </div>
