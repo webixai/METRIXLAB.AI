@@ -46,7 +46,7 @@ Template context: ${template || "modern landing page"}`;
       throw new Error("No response from AI model");
     }
 
-    const text = response.candidates[0]?.content?.parts[0]?.text;
+    const text = response.candidates[0]?.content?.parts[0]?.text || "";
     if (!text) {
       throw new Error("No text content generated");
     }

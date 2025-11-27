@@ -98,18 +98,18 @@ export default function ShowcaseSection() {
               transition={{ type: "spring", damping: 20, stiffness: 300 }}
               className="fixed inset-0 flex items-center justify-center z-50 p-4"
             >
-              <div className="rounded-xl shadow-2xl w-full max-w-lg overflow-hidden border border-gray-200 flex flex-col">
-                {/* Header - Light Amber (20%) */}
+              <div className="rounded-xl shadow-2xl w-full max-w-lg overflow-hidden border-2 flex flex-col" style={{ borderColor: "#E1D5B8" }}>
+                {/* Header - Subtle Taupe Accent (20%) */}
                 <div
                   className="p-5"
                   style={{
-                    backgroundColor: "#FEF3C7",
+                    backgroundColor: "#E1D5B8",
                   }}
                 >
                   <h3 className="text-2xl font-display mb-1" style={{ color: "#1a1a1a" }}>
                     {selectedTemplate}
                   </h3>
-                  <p className="font-body text-sm" style={{ color: "#78350F" }}>
+                  <p className="font-body text-sm" style={{ color: "#A3A86D" }}>
                     Describe your vision and let AI create it
                   </p>
                 </div>
@@ -137,8 +137,8 @@ export default function ShowcaseSection() {
                       placeholder={`Describe the perfect ${selectedTemplate.toLowerCase()} for your needs...`}
                       className="w-full px-4 py-3 border-2 rounded-lg font-body focus:outline-none focus:border-2 transition-colors resize-none disabled:opacity-50 disabled:cursor-not-allowed"
                       style={{
-                        borderColor: "#FEF3C7",
-                        backgroundColor: "#FFFBEB",
+                        borderColor: "#A3A86D",
+                        backgroundColor: "#F9F7F3",
                         color: "#1a1a1a",
                       }}
                       rows={5}
@@ -149,16 +149,16 @@ export default function ShowcaseSection() {
                   </div>
 
                   {/* Info text */}
-                  <p className="text-xs font-body" style={{ color: "#78350F" }}>
+                  <p className="text-xs font-body" style={{ color: "#A3A86D" }}>
                     The more details you provide, the better your generated website will be!
                   </p>
                 </div>
 
-                {/* Footer Actions - Light Amber (20%) */}
+                {/* Footer Actions - Subtle Taupe Accent (20%) */}
                 <div
                   className="px-6 py-4 flex gap-3"
                   style={{
-                    backgroundColor: "#FEF3C7",
+                    backgroundColor: "#E1D5B8",
                   }}
                 >
                   <motion.button
@@ -166,11 +166,11 @@ export default function ShowcaseSection() {
                     disabled={isGenerating}
                     className="flex-1 px-4 py-2 border-2 rounded-lg font-accent font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     style={{
-                      borderColor: "#78350F",
-                      color: "#78350F",
+                      borderColor: "#A3A86D",
+                      color: "#A3A86D",
                       backgroundColor: "transparent",
                     }}
-                    whileHover={{ backgroundColor: "#FFFBEB" }}
+                    whileHover={{ backgroundColor: "#F9F7F3" }}
                     whileTap={{ scale: 0.95 }}
                   >
                     Cancel
@@ -181,7 +181,7 @@ export default function ShowcaseSection() {
                     disabled={isGenerating || !prompt.trim()}
                     className="flex-1 px-4 py-2 rounded-lg font-accent font-semibold text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                     style={{
-                      backgroundColor: "#FBBF24",
+                      backgroundColor: "#A3A86D",
                     }}
                     whileHover={{ scale: isGenerating ? 1 : 1.05 }}
                     whileTap={{ scale: 0.95 }}
