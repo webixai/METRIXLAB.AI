@@ -19,7 +19,7 @@ const config: Config = {
       fontFamily: {
         display: ['Playfair Display', 'Raleway'],
         body: ['Poppins', 'Raleway'],
-        accent: ['Rammetto One'],
+        accent: ['Outfit'],
       },
       boxShadow: {
         card: "0 4px 14px rgba(0,0,0,0.08)",
