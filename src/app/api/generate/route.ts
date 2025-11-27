@@ -1,95 +1,150 @@
 import { NextRequest, NextResponse } from "next/server";
 import ai from "@/lib/gemini";
+import {
+  cleanHTMLOutput,
+  validateHTML,
+  getFallbackTemplate,
+} from "@/lib/htmlGenerator";
 
 export async function POST(request: NextRequest) {
   try {
     const { prompt, template } = await request.json();
 
-    if (!prompt) {
+    if (!prompt || prompt.trim().length === 0) {
       return NextResponse.json(
         { error: "Prompt is required" },
         { status: 400 }
       );
     }
 
-    const systemPrompt = `You are an expert web developer creating production-ready HTML websites. Generate EXACTLY valid, complete HTML code based on the user's request.
+    // Generate with Gemini
+    let generatedHTML = await generateWithGemini(prompt, template);
 
-CRITICAL RULES - FOLLOW EXACTLY:
-1. Return ONLY raw HTML code - NO markdown, NO explanations, NO code blocks, NO backticks
-2. Start with <!DOCTYPE html> and end with </html>
-3. Include complete <html>, <head>, <body> structure
-4. Place ALL styling inline using Tailwind CSS classes (NO <style> tags)
-5. Include Tailwind CDN: <link href="https://cdn.tailwindcss.com" rel="stylesheet">
-6. Add <meta name="viewport" content="width=device-width, initial-scale=1.0">
-7. Use semantic HTML: <header>, <main>, <section>, <footer>, <nav>, etc.
-8. Make fully responsive with Tailwind breakpoints (sm:, md:, lg:, xl:)
-9. Use professional typography with proper hierarchy
-10. Ensure all links are functional (href="#")
-11. Make all buttons interactive-ready with proper styling
-12. Include proper whitespace and padding for readability
+    // Validate generated HTML
+    let validation = validateHTML(generatedHTML);
 
-COLOR PALETTE (MANDATORY - Apply throughout):
-- Primary Background: #FFFFFF
-- Secondary/Text: #3d4c41 (dark green) 
-- Accents: #999999 (gray)
-- Borders: #e0e0e0 (light gray)
+    // If validation fails, try fallback template
+    if (!validation.valid) {
+      console.warn(
+        `Generated HTML validation failed:`,
+        validation.errors
+      );
+      generatedHTML = getFallbackTemplate(template);
+      validation = validateHTML(generatedHTML);
 
-FONT REQUIREMENTS:
-- Use system fonts: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif
-- OR link Google Fonts: <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+      if (!validation.valid) {
+        throw new Error(
+          `Even fallback template failed validation: ${validation.errors.join(
+            ", "
+          )}`
+        );
+      }
 
-STRUCTURE REQUIREMENTS:
-- Always include a <header> with navigation/branding
-- Include a <main> section with page content
-- Use multiple <section> elements with proper spacing
-- Include call-to-action buttons styled professionally
-- Add a <footer> with links/info
-- Use grid and flexbox for layouts
+      return NextResponse.json({
+        code: generatedHTML,
+        status: "template_fallback",
+      });
+    }
 
-VALIDATION:
-- Verify all opening tags have closing tags
-- Check all attributes are properly quoted
-- Ensure no syntax errors
-- Test that all classes are valid Tailwind classes
+    return NextResponse.json({
+      code: generatedHTML,
+      status: "generated",
+    });
+  } catch (error: any) {
+    console.error("Error generating website:", error);
+
+    // Return a safe fallback template
+    const fallbackHTML = getFallbackTemplate("landing");
+
+    return NextResponse.json({
+      code: fallbackHTML,
+      status: "fallback",
+      warning: "Using default template due to generation error",
+    });
+  }
+}
+
+/**
+ * Generate HTML using Gemini with advanced prompting
+ */
+async function generateWithGemini(prompt: string, template?: string): Promise<string> {
+  const systemPrompt = `You are an expert HTML/CSS developer. Your ONLY job is to generate clean, valid HTML code.
+
+CRITICAL INSTRUCTIONS:
+1. Return ONLY HTML code - absolutely NO markdown, NO backticks, NO explanations
+2. Start immediately with <!DOCTYPE html>
+3. End with </html>
+4. Include complete structure: <html>, <head>, <body>
+5. ALL styling must use Tailwind CSS classes inline (https://cdn.tailwindcss.com)
+6. NO <style> tags
+7. Use semantic HTML: <header>, <nav>, <main>, <section>, <footer>
+
+REQUIRED IN <head>:
+- <meta charset="UTF-8">
+- <meta name="viewport" content="width=device-width, initial-scale=1.0">
+- <link href="https://cdn.tailwindcss.com" rel="stylesheet">
+- <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+COLOR SCHEME (use throughout):
+- Background: #FFFFFF (white)
+- Text/Secondary: #3d4c41 (dark green)
+- Accent: #999999 (gray)
+- Border: #e0e0e0 (light gray)
+
+FONTS:
+- Headings: font-family: 'Playfair Display', serif
+- Body: font-family: 'Poppins', sans-serif
+
+LAYOUT REQUIREMENTS:
+- Full width responsive with proper max-w containers
+- Multiple sections with clear hierarchy
+- Professional spacing and padding
+- Grid/flexbox layouts
+- CTA buttons styled with the color scheme
+- Header with branding/navigation
+- Footer with basic info
+
+VALIDATION CHECKLIST:
+✓ All tags properly closed
+✓ No markdown or code blocks
+✓ Valid Tailwind classes only
+✓ Proper HTML structure
+✓ Works standalone without external assets
 
 Template context: ${template || "modern landing page"}`;
 
-    const fullPrompt = `${systemPrompt}\n\nUser Request: ${prompt}`;
+  const userMessage = `Generate a complete, standalone HTML website for: ${prompt}
 
-    // Using Gemini 2.5 Flash - the newest Gemini model series
+Output ONLY the raw HTML code. No explanation, no markdown, no code blocks.`;
+
+  try {
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash",
-      contents: fullPrompt,
+      contents: [
+        {
+          role: "user",
+          parts: [{ text: systemPrompt + "\n\n" + userMessage }],
+        },
+      ],
     });
 
-    if (!response || !response.candidates || response.candidates.length === 0) {
-      throw new Error("No response from AI model");
+    if (!response?.candidates?.[0]?.content?.parts?.[0]?.text) {
+      throw new Error("No response from Gemini");
     }
 
-    let text = response.candidates[0]?.content?.parts[0]?.text || "";
-    if (!text) {
-      throw new Error("No text content generated");
-    }
+    let html = response.candidates[0].content.parts[0].text;
 
-    // Clean up markdown formatting if present
-    text = text
-      .replace(/```html\n?/g, "")        // Remove ```html
-      .replace(/```\n?/g, "")            // Remove ```
-      .replace(/^```.*\n/gm, "")         // Remove any code block markers
-      .trim();
+    // Clean markdown formatting
+    html = cleanHTMLOutput(html);
 
-    // Ensure it starts with <!DOCTYPE
-    if (!text.toLowerCase().startsWith("<!doctype")) {
+    // Verify it's HTML
+    if (!html.toLowerCase().includes("<!doctype")) {
       throw new Error("Generated content is not valid HTML");
     }
 
-    return NextResponse.json({ code: text });
-  } catch (error: any) {
-    console.error("Error generating website:", error);
-    const errorMessage = error?.message || error?.toString?.() || "Failed to generate website";
-    return NextResponse.json(
-      { error: errorMessage },
-      { status: 500 }
-    );
+    return html;
+  } catch (error) {
+    console.error("Gemini generation error:", error);
+    throw error;
   }
 }

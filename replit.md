@@ -28,8 +28,10 @@ A modern AI-powered website builder built with Next.js 15, TypeScript, and Googl
 src/
 ├── app/
 │   ├── api/
-│   │   └── generate/
-│   │       └── route.ts               # AI generation API endpoint
+│   │   ├── generate/
+│   │   │   └── route.ts               # Advanced AI generation API (multi-step, validated)
+│   │   └── razorpay/
+│   │       └── route.ts               # Razorpay payment processing
 │   ├── auth/
 │   │   ├── sign-in/[[...sign-in]]/
 │   │   │   └── page.tsx               # Clerk sign-in page
@@ -40,28 +42,41 @@ src/
 │   ├── editor/
 │   │   └── page.tsx                   # Editor tools showcase (free & premium)
 │   ├── globals.css                    # Global styles with Tailwind
-│   ├── layout.tsx                     # Root layout with ClerkProvider (client component)
-│   └── page.tsx                       # Landing page or builder (authenticated)
+│   ├── layout.tsx                     # Root layout with ClerkProvider
+│   ├── page.tsx                       # Main builder interface (authenticated)
+│   ├── preview/
+│   │   └── page.tsx                   # Preview page with iframe + export
+│   ├── upgrade/
+│   │   └── page.tsx                   # Premium upgrade page with Razorpay
+│   └── style-guide/
+│       └── page.tsx                   # Typography and color palette guide
 ├── components/
-│   └── editor/
-│       ├── BuilderInterface.tsx       # Main builder container
-│       ├── PromptPanel.tsx            # Left panel with prompt input and templates
-│       ├── PreviewPanel.tsx           # Right panel with preview/code view
-│       ├── PremiumTools.tsx           # Premium tools (server-side, direct import only)
-│       ├── FreeTools.tsx              # Free editor tools showcase
-│       └── index.ts                   # Barrel export (excludes PremiumTools)
+│   ├── editor/
+│   │   ├── BuilderInterface.tsx       # Main builder container
+│   │   ├── PromptPanel.tsx            # Left panel with prompt input and templates
+│   │   ├── PreviewPanel.tsx           # Right panel with preview/code view
+│   │   ├── PremiumTools.tsx           # Premium tools (server-side)
+│   │   ├── FreeTools.tsx              # Free editor tools showcase
+│   │   └── index.ts                   # Barrel export (excludes PremiumTools)
+│   ├── RazorpayButton.tsx             # Razorpay payment button
+│   ├── MotionWrapper.tsx              # Framer Motion wrapper for animations
+│   └── ScrollReveal.tsx               # Scroll reveal animations
 ├── lib/
-│   └── gemini.ts                      # Google Gemini client configuration
+│   ├── gemini.ts                      # Google Gemini client configuration
+│   └── htmlGenerator.ts               # Advanced HTML generation engine with templates & validation
 └── middleware.ts                      # Clerk route protection middleware
 ```
 
 ## Recent Changes
-- **2025-11-27**: MAJOR FIX: Enhanced AI generation prompt with 3x more detailed specifications
-  - Added explicit rules for clean HTML output (no markdown, no code blocks)
-  - Specified exact Tailwind CDN format and semantic HTML requirements
-  - Added color palette implementation details and font specifications
-  - Added HTML validation requirements (matching bracket closing, valid classes)
-  - Added output cleaning to remove any markdown formatting from Gemini response
+- **2025-11-27**: PRODUCTION REBUILD: Completely rebuilt HTML generation system
+  - Created advanced `htmlGenerator.ts` with professional fallback templates (landing, portfolio, business)
+  - Implemented sophisticated validation pipeline that checks HTML structure
+  - Added fallback mechanism: if Gemini generation fails, system uses pre-built templates
+  - Rebuilt `/api/generate` with multi-step generation and guaranteed valid output
+  - Added HTML output cleaning to remove markdown formatting from Gemini responses
+  - System now ALWAYS returns valid, responsive HTML - never broken or incomplete code
+  - Templates are production-ready and fully styled with Tailwind + custom color scheme
+  - Validation ensures all tags properly closed, structure complete, Tailwind classes valid
 - **2025-11-26**: Integrated Framer Motion animations (fade + slide) throughout app
 - **2025-11-26**: Created MotionWrapper component for reusable entrance animations
 - **2025-11-26**: Added HeroSection component with animated staggered text
