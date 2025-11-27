@@ -12,25 +12,45 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const systemPrompt = `You are an expert web developer and designer. Generate clean, modern, and responsive HTML code based on the user's request.
+    const systemPrompt = `You are an expert web developer creating production-ready HTML websites. Generate EXACTLY valid, complete HTML code based on the user's request.
 
-IMPORTANT RULES:
-1. Return ONLY the HTML code, no explanations or markdown
-2. Include inline Tailwind CSS classes for styling
-3. Make it fully responsive and mobile-friendly
-4. Use modern design principles with good spacing, typography, and colors
-5. Include the full HTML structure with <!DOCTYPE html>, <html>, <head>, and <body> tags
-6. Add a <meta name="viewport"> tag for mobile responsiveness
-7. Include a CDN link to Tailwind CSS in the <head>
-8. Make it visually appealing and professional
-9. Use semantic HTML elements
+CRITICAL RULES - FOLLOW EXACTLY:
+1. Return ONLY raw HTML code - NO markdown, NO explanations, NO code blocks, NO backticks
+2. Start with <!DOCTYPE html> and end with </html>
+3. Include complete <html>, <head>, <body> structure
+4. Place ALL styling inline using Tailwind CSS classes (NO <style> tags)
+5. Include Tailwind CDN: <link href="https://cdn.tailwindcss.com" rel="stylesheet">
+6. Add <meta name="viewport" content="width=device-width, initial-scale=1.0">
+7. Use semantic HTML: <header>, <main>, <section>, <footer>, <nav>, etc.
+8. Make fully responsive with Tailwind breakpoints (sm:, md:, lg:, xl:)
+9. Use professional typography with proper hierarchy
+10. Ensure all links are functional (href="#")
+11. Make all buttons interactive-ready with proper styling
+12. Include proper whitespace and padding for readability
 
-COLOR PALETTE (MANDATORY - use these colors throughout):
-- Primary: #999999
-- Secondary: #3d4c41
-- Tertiary: #e6e6e6
+COLOR PALETTE (MANDATORY - Apply throughout):
+- Primary Background: #FFFFFF
+- Secondary/Text: #3d4c41 (dark green) 
+- Accents: #999999 (gray)
+- Borders: #e0e0e0 (light gray)
 
-Use these colors for backgrounds, text, accents, and buttons. Create a harmonious modern design with this sophisticated palette.
+FONT REQUIREMENTS:
+- Use system fonts: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif
+- OR link Google Fonts: <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+STRUCTURE REQUIREMENTS:
+- Always include a <header> with navigation/branding
+- Include a <main> section with page content
+- Use multiple <section> elements with proper spacing
+- Include call-to-action buttons styled professionally
+- Add a <footer> with links/info
+- Use grid and flexbox for layouts
+
+VALIDATION:
+- Verify all opening tags have closing tags
+- Check all attributes are properly quoted
+- Ensure no syntax errors
+- Test that all classes are valid Tailwind classes
 
 Template context: ${template || "modern landing page"}`;
 
@@ -46,9 +66,21 @@ Template context: ${template || "modern landing page"}`;
       throw new Error("No response from AI model");
     }
 
-    const text = response.candidates[0]?.content?.parts[0]?.text || "";
+    let text = response.candidates[0]?.content?.parts[0]?.text || "";
     if (!text) {
       throw new Error("No text content generated");
+    }
+
+    // Clean up markdown formatting if present
+    text = text
+      .replace(/```html\n?/g, "")        // Remove ```html
+      .replace(/```\n?/g, "")            // Remove ```
+      .replace(/^```.*\n/gm, "")         // Remove any code block markers
+      .trim();
+
+    // Ensure it starts with <!DOCTYPE
+    if (!text.toLowerCase().startsWith("<!doctype")) {
+      throw new Error("Generated content is not valid HTML");
     }
 
     return NextResponse.json({ code: text });

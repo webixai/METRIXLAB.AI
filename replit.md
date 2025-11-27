@@ -56,6 +56,12 @@ src/
 ```
 
 ## Recent Changes
+- **2025-11-27**: MAJOR FIX: Enhanced AI generation prompt with 3x more detailed specifications
+  - Added explicit rules for clean HTML output (no markdown, no code blocks)
+  - Specified exact Tailwind CDN format and semantic HTML requirements
+  - Added color palette implementation details and font specifications
+  - Added HTML validation requirements (matching bracket closing, valid classes)
+  - Added output cleaning to remove any markdown formatting from Gemini response
 - **2025-11-26**: Integrated Framer Motion animations (fade + slide) throughout app
 - **2025-11-26**: Created MotionWrapper component for reusable entrance animations
 - **2025-11-26**: Added HeroSection component with animated staggered text
