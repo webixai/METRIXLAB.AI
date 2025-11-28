@@ -1,60 +1,111 @@
 'use client';
 import { motion } from 'framer-motion';
 import { X } from 'lucide-react';
+import { useEditorStore } from '@/store/useEditorStore';
 
-interface EditPanelProps {
+interface Props {
   onClose: () => void;
 }
 
-export default function EditPanel({ onClose }: EditPanelProps) {
+export default function EditPanel({ onClose }: Props) {
+  const {
+    backgroundColor,
+    textColor,
+    accentColor,
+    fontFamily,
+    setBackgroundColor,
+    setTextColor,
+    setAccentColor,
+    setFontFamily,
+    setPadding,
+    setSpacing,
+  } = useEditorStore();
+
+  const fonts = ['Beckan', 'Narnia', 'Bropella', 'Ardent', 'Titan One', 'Rammetto One'];
+
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center"
-      onClick={onClose}
+    <motion.aside
+      initial={{ x: '100%' }}
+      animate={{ x: 0 }}
+      exit={{ x: '100%' }}
+      transition={{ type: 'spring', damping: 25, stiffness: 180 }}
+      className="fixed top-0 right-0 h-full w-80 bg-[#11111a]/90 backdrop-blur-xl border-l border-white/10 p-6 z-50 text-white flex flex-col"
     >
-      <motion.div
-        initial={{ scale: 0.95, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.95, opacity: 0 }}
-        className="bg-[#11111a] border border-[#b78bfa]/30 rounded-lg p-6 max-w-md w-full mx-4 relative"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-white transition"
-          aria-label="Close"
-        >
-          <X size={20} />
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-xl font-semibold text-[#b78bfa]">Edit Your Website</h2>
+        <button onClick={onClose} className="p-2 hover:bg-white/10 rounded-md">
+          <X size={22} />
         </button>
+      </div>
 
-        <h2 className="text-2xl font-bold text-white mb-4">Edit Your Site</h2>
-        <p className="text-gray-300 mb-6">Coming soon: Customize colors, fonts, and layout</p>
-
-        <div className="space-y-4">
-          <div className="p-3 bg-[#1a1a22] rounded border border-[#b78bfa]/20">
-            <p className="text-sm text-gray-400">Theme & Colors</p>
-            <p className="text-white text-sm mt-1">Customization panel</p>
-          </div>
-          <div className="p-3 bg-[#1a1a22] rounded border border-[#b78bfa]/20">
-            <p className="text-sm text-gray-400">Typography</p>
-            <p className="text-white text-sm mt-1">Font family & sizes</p>
-          </div>
-          <div className="p-3 bg-[#1a1a22] rounded border border-[#b78bfa]/20">
-            <p className="text-sm text-gray-400">Layout</p>
-            <p className="text-white text-sm mt-1">Spacing & structure</p>
-          </div>
+      <div className="flex flex-col gap-4 overflow-y-auto">
+        <div>
+          <label className="block text-sm mb-1">Background Color</label>
+          <input
+            type="color"
+            value={backgroundColor}
+            onChange={(e) => setBackgroundColor(e.target.value)}
+            className="w-full h-10 border border-white/20 bg-transparent rounded"
+          />
         </div>
 
-        <button
-          onClick={onClose}
-          className="mt-6 w-full bg-[#b78bfa] hover:bg-[#9b6efc] text-white font-medium py-2 rounded transition"
-        >
-          Close
-        </button>
-      </motion.div>
-    </motion.div>
+        <div>
+          <label className="block text-sm mb-1">Text Color</label>
+          <input
+            type="color"
+            value={textColor}
+            onChange={(e) => setTextColor(e.target.value)}
+            className="w-full h-10 border border-white/20 bg-transparent rounded"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm mb-1">Accent Color</label>
+          <input
+            type="color"
+            value={accentColor}
+            onChange={(e) => setAccentColor(e.target.value)}
+            className="w-full h-10 border border-white/20 bg-transparent rounded"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm mb-1">Font Family</label>
+          <select
+            value={fontFamily}
+            onChange={(e) => setFontFamily(e.target.value)}
+            className="w-full bg-transparent border border-white/20 p-2 rounded"
+          >
+            {fonts.map((f) => (
+              <option key={f} value={f}>
+                {f}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label className="block text-sm mb-1">Padding</label>
+          <input
+            type="range"
+            min="0"
+            max="64"
+            onChange={(e) => setPadding(Number(e.target.value))}
+            className="w-full"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm mb-1">Spacing</label>
+          <input
+            type="range"
+            min="0"
+            max="64"
+            onChange={(e) => setSpacing(Number(e.target.value))}
+            className="w-full"
+          />
+        </div>
+      </div>
+    </motion.aside>
   );
 }
