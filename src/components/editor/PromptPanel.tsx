@@ -76,8 +76,7 @@ export default function PromptPanel({ onGenerate, isGenerating, error }: PromptP
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
               placeholder="Example: Create a modern landing page for a fitness app with a hero section, feature cards, and a pricing table. Use energetic colors and bold typography."
-              className="w-full h-40 px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:border-transparent dark:bg-gray-800 dark:text-white resize-none"
-              style={{ focusRing: '2px', focusRingColor: '#A3A86D' }}
+              className="w-full h-40 px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:border-transparent focus:ring-2 focus:ring-offset-2 dark:bg-gray-800 dark:text-white resize-none"
               disabled={isGenerating}
             />
           </div>
