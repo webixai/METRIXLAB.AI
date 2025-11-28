@@ -1,70 +1,33 @@
 'use client';
 
-import { useUser } from '@clerk/nextjs';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { useClerk } from '@clerk/nextjs';
+import { useRouter } from 'next/navigation';
+import { Menu } from 'lucide-react';
 
 export default function NavBar() {
-  const { user, isLoaded } = useUser();
+  const { signOut } = useClerk();
+  const router = useRouter();
 
   return (
-    <nav className="flex items-center justify-between w-full">
-      {/* Logo */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-      >
-        <Link href="/" className="text-2xl font-clash text-[#8B5CF6] font-bold tracking-wide">
+    <nav className="flex items-center justify-between w-full px-6 py-3 rounded-xl bg-[rgba(255,255,255,0.25)] backdrop-blur-md shadow-md border border-white/30">
+      {/* Left: logo and brand name */}
+      <div className="flex items-center space-x-3">
+        <Menu className="w-6 h-6 text-gray-800" />
+        <h1 className="text-xl font-bold tracking-wide text-[#6D4AFF] font-['Clash_Display']">
           MetrixLab AI
-        </Link>
-      </motion.div>
+        </h1>
+      </div>
 
-      {/* Navigation Links */}
-      <motion.div
-        className="flex items-center gap-6 md:gap-8"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
+      {/* Right: logout button */}
+      <button
+        onClick={() => {
+          signOut();
+          router.push('/sign-in');
+        }}
+        className="px-4 py-1.5 text-sm font-medium text-white rounded-lg bg-[#6D4AFF] hover:bg-[#5a3ae0] transition-all duration-200 shadow-sm"
       >
-        {isLoaded && user ? (
-          <>
-            <Link
-              href="/dashboard"
-              className="text-sm md:text-base font-outfit text-[#111827] hover:text-[#8B5CF6] transition-colors"
-            >
-              Dashboard
-            </Link>
-            <Link
-              href="/editor"
-              className="text-sm md:text-base font-outfit text-[#111827] hover:text-[#8B5CF6] transition-colors"
-            >
-              Editor
-            </Link>
-            <button
-              onClick={() => window.location.href = '/api/auth/signout'}
-              className="px-4 py-2 bg-[#8B5CF6] text-white rounded-lg font-poppins font-medium hover:bg-[#7C3AED] transition-colors"
-            >
-              Sign Out
-            </button>
-          </>
-        ) : (
-          <>
-            <Link
-              href="/auth/sign-in"
-              className="text-sm md:text-base font-outfit text-[#111827] hover:text-[#8B5CF6] transition-colors"
-            >
-              Sign In
-            </Link>
-            <Link
-              href="/auth/sign-up"
-              className="px-4 py-2 bg-[#8B5CF6] text-white rounded-lg font-poppins font-medium hover:bg-[#7C3AED] transition-colors"
-            >
-              Sign Up
-            </Link>
-          </>
-        )}
-      </motion.div>
+        Logout
+      </button>
     </nav>
   );
 }

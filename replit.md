@@ -62,6 +62,8 @@ src/
 │   │   ├── PremiumTools.tsx           # Premium tools (server-side)
 │   │   ├── FreeTools.tsx              # Free editor tools showcase
 │   │   └── index.ts                   # Barrel export (excludes PremiumTools)
+│   ├── NavBar.tsx                     # Navigation bar with glassmorphic design & Clerk logout
+│   ├── LoadingScreen.tsx              # 2.5s animated loading screen with shimmer text
 │   ├── EditButton.tsx                 # Floating edit button with purple pencil icon
 │   ├── EditPanel.tsx                  # Slide-in editor sidebar with color/font/spacing controls
 │   ├── PreviewArea.tsx                # Live preview of edited website
@@ -77,6 +79,16 @@ src/
 ```
 
 ## Recent Changes
+- **2025-11-28**: UI Polish & NavBar Redesign
+  - Completely rebuilt `layout.tsx` with animated loading screen (2.5s shimmer effect)
+  - Implemented staggered animations: loading screen (0s) → navbar (0.3s) → content (0.6s)
+  - Created new `NavBar.tsx` component with glassmorphic design (rgba + backdrop-blur)
+  - NavBar features: Menu icon, brand name with Clash Display font, Logout button with Clerk integration
+  - Added glass-effect styling to navbar and main content containers
+  - Removed old Navbar.tsx file to fix webpack casing conflict
+  - Updated page.tsx imports to use NavBar (capitalized)
+  - Fixed file structure: NavBar.tsx properly cased for consistency
+  - All animations use Framer Motion with easeOut timing functions
 - **2025-11-28**: Live Editor & Premium Tier Enhancements
   - Created EditButton component with floating purple pencil icon
   - Implemented EditPanel sidebar with color picker (background, text, accent) and font/spacing controls
@@ -155,15 +167,19 @@ src/
 ## User Preferences
 - **Branding**: "MetrixLab AI" / "MetrixLab Plus" (for premium)
 - **Color Scheme**: 
-  - Primary: #b78bfa (Purple)
-  - Secondary: #00e0b8 (Cyan accent)
-  - Background: Dark (#0a0a0a for pages, #11111a for panels)
+  - Primary: #8B5CF6 (Purple)
+  - Secondary: #6D4AFF (Deep Purple)
+  - Background: Gradient animated (120deg, purple-teal-green, 18s loop)
   - Text: Light (white/gray)
-- **Theme**: Dark mode with purple accents
+- **Theme**: Dark mode with animated gradient + glassmorphism effects
+- **Design Pattern**: Glassmorphic (rgba backgrounds with backdrop-blur-md)
+- **Animations**: Framer Motion with staggered entrance animations and smooth transitions
+- **Loading UX**: 2.5s animated loading screen with shimmer text effect before app loads
 - **Pricing**: ₹249/month auto-renewing premium tier
 - **AI Model**: Google Gemini 2.5 Flash (free tier with 1M tokens/min)
-- **Authentication**: Clerk for user management with server-side and client-side auth patterns
+- **Authentication**: Clerk for user management with useClerk hook for logout integration
 - **Payment Processing**: Razorpay for subscription billing
 - **Code Organization**: Editor components organized in `src/components/editor/` with barrel exports
 - **Component Structure**: Using both client and server components appropriately for performance
 - **Live Editing**: Real-time preview of color, font, and spacing changes in editor panel
+- **Navigation**: NavBar with Menu icon, brand name (Clash Display font), and Clerk logout button
