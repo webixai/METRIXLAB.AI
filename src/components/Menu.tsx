@@ -1,13 +1,12 @@
 "use client";
-import { useUser } from "@clerk/nextjs";
-import { useAuth } from "@clerk/nextjs";
+import { useUser, useClerk } from "@clerk/nextjs";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 
 export default function Menu() {
   const { user } = useUser();
-  const { signOut } = useAuth();
+  const { signOut } = useClerk();
   const [open, setOpen] = useState(false);
   const isPremium = user?.publicMetadata?.plan === "premium";
 
