@@ -37,6 +37,8 @@ src/
 │   │   │   └── page.tsx               # Clerk sign-in page
 │   │   └── sign-up/[[...sign-up]]/
 │   │       └── page.tsx               # Clerk sign-up page
+│   ├── billing/
+│   │   └── page.tsx                   # Razorpay subscription payment page (₹249/month)
 │   ├── dashboard/
 │   │   └── page.tsx                   # User dashboard (server-side authenticated)
 │   ├── editor/
@@ -46,6 +48,8 @@ src/
 │   ├── page.tsx                       # Main builder interface (authenticated)
 │   ├── preview/
 │   │   └── page.tsx                   # Preview page with iframe + export
+│   ├── success/
+│   │   └── page.tsx                   # Payment success confirmation page
 │   ├── upgrade/
 │   │   └── page.tsx                   # Premium upgrade page with Razorpay
 │   └── style-guide/
@@ -58,9 +62,14 @@ src/
 │   │   ├── PremiumTools.tsx           # Premium tools (server-side)
 │   │   ├── FreeTools.tsx              # Free editor tools showcase
 │   │   └── index.ts                   # Barrel export (excludes PremiumTools)
+│   ├── EditButton.tsx                 # Floating edit button with purple pencil icon
+│   ├── EditPanel.tsx                  # Slide-in editor sidebar with color/font/spacing controls
+│   ├── PreviewArea.tsx                # Live preview of edited website
 │   ├── RazorpayButton.tsx             # Razorpay payment button
 │   ├── MotionWrapper.tsx              # Framer Motion wrapper for animations
 │   └── ScrollReveal.tsx               # Scroll reveal animations
+├── store/
+│   └── useEditorStore.ts              # Zustand store for editor theme & layout state
 ├── lib/
 │   ├── gemini.ts                      # Google Gemini client configuration
 │   └── htmlGenerator.ts               # Advanced HTML generation engine with templates & validation
@@ -68,6 +77,18 @@ src/
 ```
 
 ## Recent Changes
+- **2025-11-28**: Live Editor & Premium Tier Enhancements
+  - Created EditButton component with floating purple pencil icon
+  - Implemented EditPanel sidebar with color picker (background, text, accent) and font/spacing controls
+  - Added PreviewArea component for real-time live preview of edits
+  - Expanded font library to 100+ fonts across Sans Serif, Serif, Display, Monospace categories
+  - Implemented Zustand store with light theme defaults (white bg, black text)
+  - Added premium tier system: 70% fonts for free users, 100% for premium
+  - Created visual lock overlays with "Upgrade Now" buttons for premium-only features
+  - Implemented unsafeMetadata for persistent preference storage via Clerk
+  - Created `/billing` page for ₹249/month Razorpay subscription
+  - Created `/success` page for payment confirmation
+  - Enhanced EditPanel with PremiumLock component showing Lock icon overlay
 - **2025-11-27**: PRODUCTION REBUILD: Completely rebuilt HTML generation system
   - Created advanced `htmlGenerator.ts` with professional fallback templates (landing, portfolio, business)
   - Implemented sophisticated validation pipeline that checks HTML structure
@@ -111,8 +132,10 @@ src/
 - `/` - Landing page with Sign In/Sign Up (unauthenticated) or AI builder (authenticated)
 - `/auth/sign-in` - Clerk sign-in page
 - `/auth/sign-up` - Clerk sign-up page
+- `/billing` - Razorpay subscription payment page (₹249/month)
 - `/dashboard` - User dashboard (authenticated, server-side)
 - `/editor` - Editor tools showcase with free and premium features (authenticated)
+- `/success` - Payment success confirmation page (redirects after Razorpay checkout)
 - `/upgrade` - Premium upgrade page with pricing and Razorpay checkout
 - `/style-guide` - Typography and color palette style guide
 - `/api/generate` - AI website generation endpoint
@@ -130,12 +153,17 @@ src/
 - **Premium Metadata**: Users marked with `isPremium: true` in Clerk publicMetadata will see premium tools
 
 ## User Preferences
-- **Branding**: "METRIXLAB CREATION"
+- **Branding**: "MetrixLab AI" / "MetrixLab Plus" (for premium)
 - **Color Scheme**: 
-  - Primary: #999999 (Gray)
-  - Secondary: #3d4c41 (Dark Green)
-  - Tertiary: #e6e6e6 (Light Gray)
+  - Primary: #b78bfa (Purple)
+  - Secondary: #00e0b8 (Cyan accent)
+  - Background: Dark (#0a0a0a for pages, #11111a for panels)
+  - Text: Light (white/gray)
+- **Theme**: Dark mode with purple accents
+- **Pricing**: ₹249/month auto-renewing premium tier
 - **AI Model**: Google Gemini 2.5 Flash (free tier with 1M tokens/min)
 - **Authentication**: Clerk for user management with server-side and client-side auth patterns
+- **Payment Processing**: Razorpay for subscription billing
 - **Code Organization**: Editor components organized in `src/components/editor/` with barrel exports
 - **Component Structure**: Using both client and server components appropriately for performance
+- **Live Editing**: Real-time preview of color, font, and spacing changes in editor panel
