@@ -34,7 +34,7 @@ export default function Home() {
           transition={{ duration: 1.5, repeat: Infinity }}
           className="text-white text-xl font-light tracking-widest"
         >
-          Loading...
+          Loading
         </motion.div>
       </main>
     );
