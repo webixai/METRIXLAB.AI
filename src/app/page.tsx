@@ -1,4 +1,5 @@
 import Navbar from '@/components/Navbar';
+import EditButton from '@/components/EditButton';
 
 export default function Home() {
   return (
@@ -7,6 +8,7 @@ export default function Home() {
       <div className="pt-24 p-6 text-center">
         <h1 className="text-4xl font-bold">Welcome to MetrixLab AI</h1>
       </div>
+      <EditButton />
     </main>
   );
 }
