@@ -1,34 +1,26 @@
-"use client";
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+'use client';
+import { useState } from 'react';
+import { Menu } from 'lucide-react';
+import SlideMenu from './SlideMenu';
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 30);
-    };
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <motion.nav
-      className={`navbar ${scrolled ? "scrolled" : ""}`}
-      initial={{ y: -50, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6 }}
-    >
-      <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
-        <h1 className="text-2xl font-display font-bold text-primary">MetrixLab AI</h1>
-        <div className="flex space-x-6">
-          <a href="#features" className="nav-item">Features</a>
-          <a href="#templates" className="nav-item">Templates</a>
-          <a href="#pricing" className="nav-item">Pricing</a>
-          <a href="#login" className="nav-item">Login</a>
-        </div>
+    <nav className="fixed top-0 left-0 w-full z-50 bg-black/30 backdrop-blur-md border-b border-white/10">
+      <div className="flex justify-between items-center px-6 py-3">
+        <h1 className="text-2xl font-bold tracking-wide text-[#b78bfa]">SiteForge AI</h1>
+
+        <button
+          onClick={() => setMenuOpen(true)}
+          aria-label="Open menu"
+          className="p-2 rounded-md hover:bg-white/10 transition"
+        >
+          <Menu size={26} />
+        </button>
       </div>
-    </motion.nav>
+
+      <SlideMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
+    </nav>
   );
 }

@@ -1,20 +1,24 @@
 "use client";
 import { useUser, useClerk } from "@clerk/nextjs";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 
-export default function SlideMenu() {
+interface SlideMenuProps {
+  open: boolean;
+  onClose: () => void;
+}
+
+export default function SlideMenu({ open, onClose }: SlideMenuProps) {
   const { user } = useUser();
   const { signOut } = useClerk();
-  const [open, setOpen] = useState(false);
   const isPremium = user?.publicMetadata?.plan === "premium";
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       if (!target.closest(".menu-container")) {
-        setOpen(false);
+        onClose();
       }
     };
 
@@ -22,7 +26,7 @@ export default function SlideMenu() {
       document.addEventListener("click", handleClickOutside);
       return () => document.removeEventListener("click", handleClickOutside);
     }
-  }, [open]);
+  }, [open, onClose]);
 
   type MenuItem = { name: string; path: string } | { name: string; submenu: { name: string; path: string }[] };
 
@@ -49,7 +53,7 @@ export default function SlideMenu() {
 
   const handleLogout = async () => {
     await signOut();
-    setOpen(false);
+    onClose();
   };
 
   return (
@@ -57,7 +61,7 @@ export default function SlideMenu() {
       {/* Hamburger Button */}
       <motion.button
         className="hamburger-btn"
-        onClick={() => setOpen(!open)}
+        onClick={() => onClose()}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
         style={{
@@ -90,7 +94,7 @@ export default function SlideMenu() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            onClick={() => setOpen(false)}
+            onClick={() => onClose()}
             style={{
               position: "fixed",
               top: 0,
@@ -159,7 +163,7 @@ export default function SlideMenu() {
                         >
                           <Link
                             href={sub.path}
-                            onClick={() => setOpen(false)}
+                            onClick={() => onClose()}
                             style={{
                               display: "block",
                               padding: "10px 0",
@@ -190,7 +194,7 @@ export default function SlideMenu() {
                   >
                     <Link
                       href={item.path || "#"}
-                      onClick={() => setOpen(false)}
+                      onClick={() => onClose()}
                       style={{
                         display: "block",
                         padding: "12px 0",
