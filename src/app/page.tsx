@@ -1,7 +1,6 @@
 "use client";
 
 import { useAuth, UserButton } from "@clerk/nextjs";
-import { useRouter } from "next/navigation";
 import { BuilderInterface } from "@/components/editor";
 import ShowcaseSection from "@/components/ShowcaseSection";
 import HeroSection from "@/components/HeroSection";
@@ -12,7 +11,6 @@ import { motion } from "framer-motion";
 
 export default function Home() {
   const { isSignedIn, isLoaded } = useAuth();
-  const router = useRouter();
 
   if (!isLoaded) {
     return (
@@ -21,6 +19,7 @@ export default function Home() {
         style={{
           background: 'linear-gradient(to bottom right, #3d4c41, #e6e6e6)',
         }}
+        suppressHydrationWarning
       >
         <motion.div
           animate={{ scale: [1, 1.1, 1] }}
@@ -44,7 +43,7 @@ export default function Home() {
     return (
       <>
         <Navbar />
-        <main className="min-h-screen bg-background space-y-20 pt-24">
+        <main className="min-h-screen bg-background space-y-20 pt-24" suppressHydrationWarning>
           <HeroSection />
           <ParallaxSection
             backgroundImage="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80"
@@ -63,6 +62,7 @@ export default function Home() {
       style={{
         background: 'linear-gradient(to bottom right, #3d4c41, #e6e6e6)',
       }}
+      suppressHydrationWarning
     >
       <Menu />
       <div className="absolute top-4 right-4">
