@@ -21,7 +21,26 @@ export default function EditPanel({ onClose }: Props) {
     setSpacing,
   } = useEditorStore();
 
-  const fonts = ['Beckan', 'Narnia', 'Bropella', 'Ardent', 'Titan One', 'Rammetto One'];
+  const fonts = [
+    // Sans Serif
+    'Poppins', 'Roboto', 'Inter', 'Ubuntu', 'Raleway', 'Montserrat', 'Open Sans', 'Lato', 'Source Sans Pro', 'Titillium Web',
+    'Karla', 'Work Sans', 'Manrope', 'Nunito', 'Quicksand', 'Mulish', 'DM Sans', 'Comfortaa', 'Cabin', 'Prompt',
+    'Sora', 'Lexend', 'Jost', 'Outfit', 'Space Grotesk', 'IBM Plex Sans', 'Georama', 'Oxygen', 'Varela Round', 'Tahoma',
+    'Verdana', 'Segoe UI', 'Trebuchet MS', 'Arial', 'Helvetica', 'Calibri', 'Gotham', 'Futura', 'Century Gothic', 'Candara',
+    'Noto Sans', 'Public Sans', 'Plus Jakarta Sans', 'Urbanist', 'Hanken Grotesk', 'Red Hat Display', 'Barlow', 'Dm Display', 'Faustina', 'Syne',
+    // Serif
+    'Playfair Display', 'Lora', 'Merriweather', 'Bitter', 'Droid Serif', 'Cormorant Garamond', 'Prata', 'Crimson Text', 'Cambria', 'Georgia',
+    'Garamond', 'Times New Roman', 'Palatino', 'Baskerville', 'Bodoni', 'Caladea', 'Noto Serif', 'IM Fell English', 'Cinzel', 'Cardo',
+    'Abril Fatface', 'Charm', 'Cormorant', 'Domine', 'DM Serif Display', 'Fraunces', 'Gidole', 'Kaisei Tokuriki', 'Lora', 'Overpass',
+    'Rozha One', 'Slab', 'Sohne', 'Spectral', 'Yrsa', 'Zilla Slab',
+    // Display/Decorative
+    'Bebas Neue', 'Oswald', 'Anton', 'Fredoka One', 'Righteous', 'Pacifico', 'Lobster', 'Righteous', 'Caveat', 'Indie Flower',
+    'Permanent Marker', 'Sacramento', 'Fredoka', 'Alfa Slab One', 'Bungee', 'Rubik Mono One', 'Space Mono', 'JetBrains Mono', 'IBM Plex Mono',
+    'Courier Prime', 'Courier New', 'Courier', 'Inconsolata', 'Source Code Pro', 'Victor Mono', 'Operator Mono', 'Monaco',
+    'Menlo', 'Roboto Mono', 'Fira Code', 'Hack', 'Liberation Mono', 'Courier', 'Overpass Mono', 'PT Mono', 'Roboto Condensed',
+    'Oswald', 'Bebas Neue', 'Anton', 'Righteous', 'Fredoka One', 'Alfa Slab One', 'Bungee', 'Rubik Mono One', 'Bungee Shade',
+    'Fredoka One', 'Fredoka Two', 'Fredoka Three', 'Fredoka Four', 'Fredoka Five', 'Fredoka Six', 'Fredoka Seven', 'Fredoka Eight',
+  ];
 
   return (
     <motion.aside
