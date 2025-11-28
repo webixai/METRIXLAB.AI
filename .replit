@@ -93,3 +93,9 @@ externalPort = 8008
 [[ports]]
 localPort = 44613
 externalPort = 3000
+
+[userenv]
+
+[userenv.shared]
+NEXT_PUBLIC_RAZORPAY_KEY_ID = "rzp_test_placeholder"
+RAZORPAY_SECRET_KEY = "placeholder_secret"
