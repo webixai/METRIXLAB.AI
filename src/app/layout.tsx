@@ -1,21 +1,14 @@
-import type { Metadata } from "next";
-import { ClerkProvider } from "@clerk/nextjs";
-import "./globals.css";
+'use client';
 
-export const metadata: Metadata = {
-  title: "METRIXLAB CREATION - AI Website Builder",
-  description: "Build stunning websites with AI in seconds",
-};
+import './globals.css';
+import { ClerkProvider } from '@clerk/nextjs';
+import { ReactNode } from 'react';
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
-        <head>
-          <meta charSet="utf-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-        </head>
-        <body suppressHydrationWarning>
+      <html lang="en">
+        <body className="bg-[#0b0b0f] text-white font-sans min-h-screen">
           {children}
         </body>
       </html>
