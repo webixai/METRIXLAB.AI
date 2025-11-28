@@ -16,13 +16,14 @@ interface EditorState {
   setPadding: (value: number) => void;
   setSpacing: (value: number) => void;
   setSelectedElementId: (id: string | null) => void;
+  hydrateFromMetadata: (theme: any) => void;
 }
 
 export const useEditorStore = create<EditorState>((set) => ({
   backgroundColor: '#0b0b0f',
   textColor: '#ffffff',
   accentColor: '#b78bfa',
-  fontFamily: 'Beckan, serif',
+  fontFamily: 'Poppins',
   padding: 24,
   spacing: 16,
   selectedElementId: null,
@@ -34,4 +35,12 @@ export const useEditorStore = create<EditorState>((set) => ({
   setPadding: (value) => set({ padding: value }),
   setSpacing: (value) => set({ spacing: value }),
   setSelectedElementId: (id) => set({ selectedElementId: id }),
+  hydrateFromMetadata: (theme) => set({
+    backgroundColor: theme.backgroundColor || '#0b0b0f',
+    textColor: theme.textColor || '#ffffff',
+    accentColor: theme.accentColor || '#b78bfa',
+    fontFamily: theme.fontFamily || 'Poppins',
+    padding: theme.padding || 24,
+    spacing: theme.spacing || 16,
+  }),
 }));

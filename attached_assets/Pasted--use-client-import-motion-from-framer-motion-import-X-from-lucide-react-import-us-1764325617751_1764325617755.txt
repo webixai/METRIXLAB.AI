@@ -10,19 +10,16 @@ interface Props {
   onClose: () => void;
 }
 
+// ✅ You can dynamically load fonts from your imported font list
+// Example: store all imported font names in an array in a utils file, or inline like this:
 const importedFonts = [
-  'Poppins', 'Roboto', 'Inter', 'Ubuntu', 'Raleway', 'Montserrat', 'Open Sans', 'Lato', 'Source Sans Pro', 'Titillium Web',
-  'Karla', 'Work Sans', 'Manrope', 'Nunito', 'Quicksand', 'Mulish', 'DM Sans', 'Comfortaa', 'Cabin', 'Prompt',
-  'Sora', 'Lexend', 'Jost', 'Outfit', 'Space Grotesk', 'IBM Plex Sans', 'Georama', 'Oxygen', 'Varela Round', 'Tahoma',
-  'Verdana', 'Segoe UI', 'Trebuchet MS', 'Arial', 'Helvetica', 'Calibri', 'Gotham', 'Futura', 'Century Gothic', 'Candara',
-  'Noto Sans', 'Public Sans', 'Plus Jakarta Sans', 'Urbanist', 'Hanken Grotesk', 'Red Hat Display', 'Barlow', 'Dm Display', 'Faustina', 'Syne',
-  'Playfair Display', 'Lora', 'Merriweather', 'Bitter', 'Droid Serif', 'Cormorant Garamond', 'Prata', 'Crimson Text', 'Cambria', 'Georgia',
-  'Garamond', 'Times New Roman', 'Palatino', 'Baskerville', 'Bodoni', 'Caladea', 'Noto Serif', 'IM Fell English', 'Cinzel', 'Cardo',
-  'Abril Fatface', 'Charm', 'Cormorant', 'Domine', 'DM Serif Display', 'Fraunces', 'Gidole', 'Kaisei Tokuriki', 'Overpass',
-  'Rozha One', 'Sohne', 'Spectral', 'Yrsa', 'Zilla Slab', 'Bebas Neue', 'Oswald', 'Anton', 'Fredoka One', 'Righteous',
-  'Pacifico', 'Lobster', 'Caveat', 'Indie Flower', 'Permanent Marker', 'Sacramento', 'Fredoka', 'Alfa Slab One', 'Bungee', 'Rubik Mono One',
-  'Space Mono', 'JetBrains Mono', 'IBM Plex Mono', 'Courier Prime', 'Courier New', 'Courier', 'Inconsolata', 'Source Code Pro', 'Victor Mono', 'Operator Mono',
-  'Monaco', 'Menlo', 'Roboto Mono', 'Fira Code', 'Hack', 'Liberation Mono', 'Overpass Mono', 'PT Mono', 'Roboto Condensed', 'Bungee Shade',
+  'Beckan', 'Narnia', 'Bropella', 'Ardent', 'Titan One', 'Rammetto One',
+  'Bethany Elingston', 'Vanilla Ravioli', 'Liber', 'Rakkas', 'Roboto',
+  'Montserrat', 'Playfair Display', 'Lora', 'Inter', 'Poppins', 'Open Sans',
+  'Raleway', 'Nunito', 'Caveat', 'Bebas Neue', 'Manrope', 'Satoshi',
+  'Quicksand', 'Karla', 'DM Sans', 'Josefin Sans', 'Work Sans',
+  'Outfit', 'Orbitron', 'Space Grotesk', 'Cabinet Grotesk',
+  // ... (add the rest here)
 ];
 
 export default function EditPanel({ onClose }: Props) {
@@ -47,24 +44,27 @@ export default function EditPanel({ onClose }: Props) {
     hydrateFromMetadata,
   } = useEditorStore();
 
+  // ✅ Restore saved user preferences automatically on login
   useEffect(() => {
-    if (isLoaded && user?.unsafeMetadata?.theme) {
-      const savedTheme = user.unsafeMetadata.theme as any;
+    if (isLoaded && user?.publicMetadata?.theme) {
+      const savedTheme = user.publicMetadata.theme as any;
       hydrateFromMetadata(savedTheme);
     }
   }, [isLoaded, user, hydrateFromMetadata]);
 
+  // ✅ Split fonts dynamically — 70% for free, 100% for premium
   const availableFonts = useMemo(() => {
     const freeLimit = Math.ceil(importedFonts.length * 0.7);
     return isPremium ? importedFonts : importedFonts.slice(0, freeLimit);
   }, [isPremium]);
 
+  // ✅ Save preferences to Clerk (premium only)
   const handleSave = async () => {
     if (!isPremium || !user) return;
     try {
       await user.update({
-        unsafeMetadata: {
-          ...(user.unsafeMetadata || {}),
+        publicMetadata: {
+          ...user.publicMetadata,
           theme: {
             backgroundColor,
             textColor,
@@ -89,6 +89,7 @@ export default function EditPanel({ onClose }: Props) {
       transition={{ type: 'spring', damping: 25, stiffness: 180 }}
       className="fixed top-0 right-0 h-full w-96 bg-[#11111a]/90 backdrop-blur-xl border-l border-white/10 p-6 z-50 text-white flex flex-col"
     >
+      {/* HEADER */}
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-semibold text-[#b78bfa]">
           {isPremium ? 'Full Editor Access' : 'Free Editor (70%)'}
@@ -98,7 +99,9 @@ export default function EditPanel({ onClose }: Props) {
         </button>
       </div>
 
+      {/* EDIT OPTIONS */}
       <div className="flex flex-col gap-4 overflow-y-auto pr-2">
+        {/* Background Color */}
         <div>
           <label className="block text-sm mb-1">Background Color</label>
           <input
@@ -109,6 +112,7 @@ export default function EditPanel({ onClose }: Props) {
           />
         </div>
 
+        {/* Text Color */}
         <div>
           <label className="block text-sm mb-1">Text Color</label>
           <input
@@ -119,6 +123,7 @@ export default function EditPanel({ onClose }: Props) {
           />
         </div>
 
+        {/* Accent Color */}
         {isPremium && (
           <div>
             <label className="block text-sm mb-1">Accent Color</label>
@@ -131,12 +136,13 @@ export default function EditPanel({ onClose }: Props) {
           </div>
         )}
 
+        {/* Font Family */}
         <div>
           <label className="block text-sm mb-1">Font Family</label>
           <select
             value={fontFamily}
             onChange={(e) => setFontFamily(e.target.value)}
-            className="w-full bg-transparent border border-white/20 p-2 rounded text-white"
+            className="w-full bg-transparent border border-white/20 p-2 rounded"
           >
             {availableFonts.map((f) => (
               <option key={f} value={f}>
@@ -151,6 +157,7 @@ export default function EditPanel({ onClose }: Props) {
           )}
         </div>
 
+        {/* Padding */}
         <div>
           <label className="block text-sm mb-1">Padding</label>
           <input
@@ -163,6 +170,7 @@ export default function EditPanel({ onClose }: Props) {
           />
         </div>
 
+        {/* Spacing */}
         <div>
           <label className="block text-sm mb-1">Spacing</label>
           <input
@@ -175,6 +183,7 @@ export default function EditPanel({ onClose }: Props) {
           />
         </div>
 
+        {/* SAVE BUTTON (Premium only) */}
         {isPremium && (
           <button
             onClick={handleSave}
@@ -185,6 +194,7 @@ export default function EditPanel({ onClose }: Props) {
         )}
       </div>
 
+      {/* FOOTER */}
       {!isPremium && (
         <p className="text-xs text-gray-500 mt-6 text-center">
           Upgrade to unlock full editor controls & permanent saves.
