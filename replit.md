@@ -79,6 +79,15 @@ src/
 ```
 
 ## Recent Changes
+- **2025-11-30**: Enhanced NavBar with Fixed Positioning & Dropdown Menu
+  - Updated `NavBar.tsx` with fixed positioning (top-0, z-50) to stay visible while scrolling
+  - Added hamburger menu icon with dropdown navigation (Dashboard, Editor, Billing, Logout)
+  - Implemented gradient text for brand name (cyan #00E5FF to purple #7C3AED)
+  - Enhanced design: dark semi-transparent background with backdrop-blur-lg
+  - Added cyan accent border with Clerk logout button in pink (#FF4B91)
+  - Updated `layout.tsx` to add pt-20 padding-top to prevent content overlap with fixed navbar
+  - Simplified layout structure: NavBar now renders at body level (fixed, always visible)
+  - Maintained loading screen and content animations within body
 - **2025-11-28**: UI Polish & NavBar Redesign
   - Completely rebuilt `layout.tsx` with animated loading screen (2.5s shimmer effect)
   - Implemented staggered animations: loading screen (0s) → navbar (0.3s) → content (0.6s)
@@ -167,12 +176,13 @@ src/
 ## User Preferences
 - **Branding**: "MetrixLab AI" / "MetrixLab Plus" (for premium)
 - **Color Scheme**: 
-  - Primary: #8B5CF6 (Purple)
-  - Secondary: #6D4AFF (Deep Purple)
+  - Primary: #7C3AED (Purple)
+  - Accent: #00E5FF (Cyan)
+  - Secondary: #FF4B91 (Pink - logout)
   - Background: Gradient animated (120deg, purple-teal-green, 18s loop)
   - Text: Light (white/gray)
 - **Theme**: Dark mode with animated gradient + glassmorphism effects
-- **Design Pattern**: Glassmorphic (rgba backgrounds with backdrop-blur-md)
+- **Design Pattern**: Glassmorphic (rgba backgrounds with backdrop-blur-lg)
 - **Animations**: Framer Motion with staggered entrance animations and smooth transitions
 - **Loading UX**: 2.5s animated loading screen with shimmer text effect before app loads
 - **Pricing**: ₹249/month auto-renewing premium tier
@@ -182,4 +192,4 @@ src/
 - **Code Organization**: Editor components organized in `src/components/editor/` with barrel exports
 - **Component Structure**: Using both client and server components appropriately for performance
 - **Live Editing**: Real-time preview of color, font, and spacing changes in editor panel
-- **Navigation**: NavBar with Menu icon, brand name (Clash Display font), and Clerk logout button
+- **Navigation**: Fixed navbar with gradient text, hamburger dropdown menu (Dashboard, Editor, Billing, Logout)

@@ -3,31 +3,64 @@
 import { useClerk } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 import { Menu } from 'lucide-react';
+import { useState } from 'react';
 
-export default function NavBar() {
+export default function Navbar() {
   const { signOut } = useClerk();
   const router = useRouter();
+  const [open, setOpen] = useState(false);
 
   return (
-    <nav className="flex items-center justify-between w-full px-6 py-3 rounded-xl bg-[rgba(255,255,255,0.25)] backdrop-blur-md shadow-md border border-white/30">
-      {/* Left: logo and brand name */}
-      <div className="flex items-center space-x-3">
-        <Menu className="w-6 h-6 text-gray-800" />
-        <h1 className="text-xl font-bold tracking-wide text-[#6D4AFF] font-['Clash_Display']">
+    <nav className="fixed top-0 left-0 w-full z-50 px-6 py-3 bg-[rgba(10,10,25,0.7)] backdrop-blur-lg border-b border-[#00E5FF]/30 shadow-lg">
+      <div className="flex items-center justify-between">
+        {/* Brand Name */}
+        <h1 className="text-2xl font-bold tracking-wide font-['Clash_Display'] text-transparent bg-clip-text bg-gradient-to-r from-[#00E5FF] to-[#7C3AED]">
           MetrixLab AI
         </h1>
+
+        {/* Hamburger */}
+        <button
+          onClick={() => setOpen(!open)}
+          className="p-2 rounded-md hover:bg-[#7C3AED]/20 transition-all"
+        >
+          <Menu className="w-6 h-6 text-[#00E5FF]" />
+        </button>
       </div>
 
-      {/* Right: logout button */}
-      <button
-        onClick={() => {
-          signOut();
-          router.push('/sign-in');
-        }}
-        className="px-4 py-1.5 text-sm font-medium text-white rounded-lg bg-[#6D4AFF] hover:bg-[#5a3ae0] transition-all duration-200 shadow-sm"
-      >
-        Logout
-      </button>
+      {/* Dropdown Menu */}
+      {open && (
+        <div className="absolute right-6 mt-3 w-48 bg-[#0b0b20]/90 backdrop-blur-xl rounded-lg border border-[#00E5FF]/20 shadow-xl">
+          <ul className="flex flex-col text-sm font-medium text-white">
+            <li
+              onClick={() => router.push('/dashboard')}
+              className="px-4 py-2 hover:bg-[#7C3AED]/30 cursor-pointer rounded-t-lg"
+            >
+              Dashboard
+            </li>
+            <li
+              onClick={() => router.push('/editor')}
+              className="px-4 py-2 hover:bg-[#7C3AED]/30 cursor-pointer"
+            >
+              Editor
+            </li>
+            <li
+              onClick={() => router.push('/billing')}
+              className="px-4 py-2 hover:bg-[#7C3AED]/30 cursor-pointer"
+            >
+              Billing
+            </li>
+            <li
+              onClick={() => {
+                signOut();
+                router.push('/sign-in');
+              }}
+              className="px-4 py-2 text-[#FF4B91] hover:bg-[#7C3AED]/20 rounded-b-lg cursor-pointer"
+            >
+              Logout
+            </li>
+          </ul>
+        </div>
+      )}
     </nav>
   );
 }
