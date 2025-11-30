@@ -17,10 +17,9 @@
 
 /* Animated Gradient Background */
 body {
-  @apply text-[var(--foreground)] bg-[var(--background)];
-  background: linear-gradient(120deg, #e0c3fc, #8ec5fc, #a7f3d0, #e0c3fc);
-  background-size: 400% 400%;
-  animation: gradientShift 18s ease infinite;
+  @apply min-h-screen bg-gradient-to-br from-[#0a0a1a] via-[#14143c] to-[#0d1b2a] text-white;
+  background-attachment: fixed;
+  background-size: cover;
   font-family: 'Inter', sans-serif;
 }
 
