@@ -5,15 +5,34 @@ export default function Home() {
   const [previewVisible, setPreviewVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const [prompt, setPrompt] = useState('');
+  const [generatedHTML, setGeneratedHTML] = useState('');
+  const [error, setError] = useState('');
 
   const handleGenerate = async () => {
     if (!prompt.trim()) return;
     setLoading(true);
-    // simulate generation
-    setTimeout(() => {
-      setLoading(false);
+    setError('');
+    
+    try {
+      const response = await fetch('/api/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt, template: 'landing' }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to generate website');
+      }
+
+      const data = await response.json();
+      setGeneratedHTML(data.code);
       setPreviewVisible(true);
-    }, 2000);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Generation failed');
+      console.error('Generation error:', err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -48,14 +67,43 @@ export default function Home() {
           )}
         </>
       ) : (
-        <section className="mt-10 w-full max-w-4xl bg-white rounded-xl shadow-lg p-6 text-black relative">
-          <h3 className="text-2xl font-bold mb-4 text-[#7C3AED]">Live Preview</h3>
-          <p>This is your generated website preview.</p>
+        <section className="mt-10 w-full max-w-4xl bg-white rounded-xl shadow-lg overflow-hidden relative">
+          <div className="p-6 border-b border-gray-200">
+            <h3 className="text-2xl font-bold text-[#7C3AED]">Live Preview</h3>
+          </div>
 
-          {/* Edit button only visible here */}
-          <button className="absolute bottom-4 right-4 bg-[#7C3AED] hover:bg-[#5f2ddb] text-white px-4 py-2 rounded-full flex items-center gap-2">
-            ✏️ Edit
-          </button>
+          {error ? (
+            <div className="p-6 text-red-600">
+              <p>Error: {error}</p>
+            </div>
+          ) : (
+            <iframe
+              srcDoc={generatedHTML}
+              className="w-full h-[600px] border-0"
+              title="Generated Website Preview"
+            />
+          )}
+
+          {/* Button group */}
+          <div className="flex gap-2 p-4 bg-gray-100 border-t border-gray-200">
+            <button
+              onClick={() => setPreviewVisible(false)}
+              className="px-4 py-2 bg-gray-300 hover:bg-gray-400 text-black rounded-lg transition-all"
+            >
+              ← Back
+            </button>
+            <button
+              onClick={() => {
+                const link = document.createElement('a');
+                link.href = `data:text/html;charset=utf-8,${encodeURIComponent(generatedHTML)}`;
+                link.download = 'website.html';
+                link.click();
+              }}
+              className="px-4 py-2 bg-[#7C3AED] hover:bg-[#5f2ddb] text-white rounded-lg transition-all"
+            >
+              ⬇️ Download
+            </button>
+          </div>
         </section>
       )}
     </div>
